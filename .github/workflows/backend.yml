@@ -2,43 +2,17 @@ name: backend
 
 on:
   push:
-    branches: [ main ]
-    paths:
-      - '**/*.java'
-      - 'pom.xml'
-      - '.github/workflows/backend.yml'
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
-    paths:
-      - '**/*.java'
-      - 'pom.xml'
-      - '.github/workflows/backend.yml'
+    branches: [ "main" ]
 
 jobs:
   build_test:
     runs-on: ubuntu-latest
 
-    env:
-      DB_NAME: ${{ secrets.DB_NAME }}
-      DB_USERNAME: ${{ secrets.DB_USERNAME }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_DATABASE: ${{ secrets.DB_NAME }}
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MYSQL_USER: ${{ secrets.DB_USERNAME }}
-          MYSQL_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -p$MYSQL_ROOT_PASSWORD"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=30
+    defaults:
+      run:
+        working-directory: wbapp
 
     steps:
       - name: Checkout
@@ -48,35 +22,15 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: 21
           cache: maven
 
-      - name: Install MySQL client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y mysql-client
-
       - name: Make mvnw executable
-        run: chmod +x mvnw             # <-- w katalogu głównym repo
+        run: chmod +x mvnw
 
-      - name: Wait for MySQL to be ready
-        run: |
-          for i in {1..60}; do
-            if mysqladmin ping -h 127.0.0.1 -uroot -p"$MYSQL_ROOT_PASSWORD" --silent; then
-              echo "MySQL is up"
-              break
-            fi
-            echo "⏳ waiting for MySQL... ($i/60)"
-            sleep 2
-          done
+      - name: Run unit tests on H2
+        run: ./mvnw -B -Dspring.profiles.active=test test
 
-      - name: Build & test (with MySQL)
-        run: |
-          ./mvnw -B -ntp \
-            -Dspring.datasource.url="jdbc:mysql://127.0.0.1:3306/$DB_NAME?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC" \
-            -Dspring.datasource.username="$DB_USERNAME" \
-            -Dspring.datasource.password="$DB_PASSWORD" \
-            test
 
 
 
