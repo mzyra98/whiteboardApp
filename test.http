@@ -1,0 +1,8 @@
+### Utwórz użytkownika
+POST http://localhost:8080/api/uzytkownicy
+Content-Type: application/json
+
+{
+  "nazwaWyswietlana": "Mateusz",
+  "email": "mateusz@example.com"
+}
