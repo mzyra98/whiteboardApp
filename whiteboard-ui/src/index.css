@@ -1,68 +1,124 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --tlo: #0b0c10;
+  --tlo-karty: #121318;
+  --tekst: #e6e6e6;
+  --akcent: #3b82f6;
+  --ramka: #1f2230;
+  --blad: #ef4444;
+  --ok: #10b981;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
 
 body {
   margin: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background: radial-gradient(1200px 800px at 15% 10%, #10121a 0%, #0b0c10 60%, #08090c 100%);
+  color: var(--tekst);
+}
+
+.kontener { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+.naglowek {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid var(--ramka);
+  border-radius: 16px;
+  padding: 20px 24px;
+  backdrop-filter: blur(6px);
+}
+
+.naglowek h1 { margin: 0 0 8px 0; font-size: 28px; letter-spacing: 0; }
+.naglowek p { margin: 0; opacity: 0.9; }
+
+.uklad {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+}
+
+.menu {
+  background: var(--tlo-karty);
+  border: 1px solid var(--ramka);
+  border-radius: 16px;
+  padding: 12px;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  gap: 8px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
+.menu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--tekst);
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.menu a:hover { background: rgba(255,255,255,0.04); }
+.menu a.aktywny { border-color: var(--akcent); color: var(--akcent); background: rgba(59,130,246,0.08); }
+
+main {
+  background: var(--tlo-karty);
+  border: 1px solid var(--ramka);
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 180px;
+}
+
+a { color: var(--akcent); text-decoration: none; }
+
+.formularz { display: grid; gap: 12px; max-width: 560px; }
+.pole { display: grid; gap: 6px; }
+.pole label { font-size: 14px; opacity: 0.9; }
+.pole input, .pole select, .pole textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--ramka);
+  background: #0f1016;
+  color: var(--tekst);
+}
+.przyciski { display: flex; gap: 8px; }
+button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--ramka);
+  background: #1a1c26;
+  color: var(--tekst);
+  cursor: pointer;
+}
+button:hover { background: #1e2130; }
+button:disabled { opacity: 0.6; cursor: default; }
+
+.komunikat-blad { color: var(--blad); }
+.komunikat-sukces { color: var(--ok); }
+
+.kod {
+  white-space: pre-wrap;
+  border: 1px solid var(--ramka);
+  border-radius: 10px;
+  padding: 12px;
+  background: #0f1016;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+}
+
+.tabela { width: 100%; border-collapse: collapse; }
+.tabela th, .tabela td { border: 1px solid var(--ramka); padding: 8px 10px; text-align: left; }
+.tabela th { background: #121522; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--ramka);
+  background: #161824;
+  font-size: 12px;
+}
+
+@media (max-width: 860px) {
+  .uklad { grid-template-columns: 1fr; }
 }

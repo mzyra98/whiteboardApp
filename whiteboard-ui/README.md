@@ -1,69 +1,85 @@
-# React + TypeScript + Vite
+# AplikacjaTablica — frontend (Vite + React 18 + TS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Wymagania
+- Node.js 18+ i npm 9+
+- Backend lokalnie: http://localhost:8080
 
-Currently, two official plugins are available:
+## Konfiguracja środowiska
+Utwórz `.env.local` na podstawie `.env.example`:
+VITE_API_BASE_URL=http://localhost:8080
+VITE_USER_ID_DO_TESTOW=9
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+shell
+Kopiuj
+Edytuj
 
-## Expanding the ESLint configuration
+## Instalacja
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+shell
+Kopiuj
+Edytuj
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tryb deweloperski
+npm run dev
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+bash
+Kopiuj
+Edytuj
+Aplikacja: http://localhost:5173
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Build produkcyjny
+npm run build
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+markdown
+Kopiuj
+Edytuj
+Wynik w `dist/`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Podgląd buildu lokalnie
+npm run preview
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+markdown
+Kopiuj
+Edytuj
+Podgląd pod adresem wskazanym w konsoli.
+
+## Warstwa HTTP
+- Globalny nagłówek `X-User-Id` pobierany z `VITE_USER_ID_DO_TESTOW`.
+- Obsługa błędów po polach `code`, `message`, `detail`. Dla 429 komunikat: „Za dużo prób. Spróbuj ponownie za chwilę.”
+
+## Checklisty testów ręcznych UI
+
+### Dołączanie
+- Token pusty → walidacja na kliencie: „Podaj token”.
+- Token nieistniejący → 404; komunikat z backendu wyświetlony w `message/detail`.
+- Kilka szybkich prób → 429; jasny komunikat o limicie.
+- Token poprawny → 200; widoczne `tablicaId` i `uprawnienie`.
+
+### Udostępnianie
+- Wpisz poprawne `ID tablicy` i utwórz link bez opcji → 201; pokazuje `token`, `url`, `wygasa`, `pozostaloWejsc`.
+- Lista aktywnych linków zawiera nowy wpis.
+- Ustaw opcjonalnie `czasWMinutach`, `maksOsob`, `uprawnienie` → 201; pola odwzorowane.
+- Kliknij „Anuluj” przy wpisie → po 204 status zmienia się na „anulowany” i przycisk jest wyłączony.
+
+### Statystyki
+- Istniejąca tablica → pretty JSON.
+- Nieistniejąca → 404; komunikat z backendu wyświetlony.
+
+## Struktura kluczowych plików
+src/
+App.tsx
+main.tsx
+index.css
+lib/
+api.ts
+api/
+statystyki.ts
+udostepnianie.ts
+strony/
+Dolacz.tsx
+Statystyki.tsx
+Udostepnij.tsx
+
+Kopiuj
+Edytuj

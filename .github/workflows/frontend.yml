@@ -2,16 +2,23 @@ name: frontend
 
 on:
   push:
+    branches: [ "main" ]
     paths:
-      - 'whiteboard-ui/**'
-      - '.github/workflows/frontend.yml'
+      - "whiteboard-ui/**"
+      - ".github/workflows/frontend.yml"
   pull_request:
+    branches: [ "main" ]
     paths:
-      - 'whiteboard-ui/**'
-      - '.github/workflows/frontend.yml'
+      - "whiteboard-ui/**"
+      - ".github/workflows/frontend.yml"
+
+concurrency:
+  group: frontend-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
+    name: Build whiteboard-ui
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,24 +28,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node.js 20
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
           cache-dependency-path: whiteboard-ui/package-lock.json
 
-      - name: Install deps
+      - name: Install dependencies
         run: npm ci
 
-      - name: Lint (optional)
-        run: npm run lint --if-present
-
       - name: Build
+        env:
+          VITE_API_BASE_URL: http://localhost:8080
+          VITE_USER_ID_DO_TESTOW: 9
         run: npm run build
 
-      - name: Upload build
+      - name: Upload dist artifact
         uses: actions/upload-artifact@v4
         with:
           name: whiteboard-ui-dist
           path: whiteboard-ui/dist
+          if-no-files-found: error
