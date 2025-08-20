@@ -3,16 +3,22 @@ name: backend
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'src/**'
+      - 'pom.xml'
+      - 'mvnw'
+      - '.github/workflows/backend.yml'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'src/**'
+      - 'pom.xml'
+      - 'mvnw'
+      - '.github/workflows/backend.yml'
 
 jobs:
   build_test:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: wbapp
 
     steps:
       - name: Checkout
@@ -22,14 +28,15 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: '21'
           cache: maven
 
       - name: Make mvnw executable
-        run: chmod +x mvnw
+        run: chmod +x ./mvnw
 
-      - name: Run unit tests on H2
-        run: ./mvnw -B -Dspring.profiles.active=test test
+      - name: Test (JUnit + H2)
+        run: ./mvnw -B -q test
+
 
 
 
