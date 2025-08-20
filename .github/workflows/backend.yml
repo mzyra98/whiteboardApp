@@ -35,7 +35,8 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: Test (JUnit + H2)
-        run: ./mvnw -B -q test
+        run: ./mvnw -B -q -Dspring.profiles.active=test test
+
 
 
 
