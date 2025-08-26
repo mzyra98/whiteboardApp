@@ -1,3 +1,8 @@
+# WhiteboardApp — collaborative whiteboard (praca inżynierska)
+
+[![backend](https://github.com/mzyra98/whiteboardApp/actions/workflows/backend.yml/badge.svg)](https://github.com/mzyra98/whiteboardApp/actions/workflows/backend.yml)
+[![frontend](https://github.com/mzyra98/whiteboardApp/actions/workflows/frontend.yml/badge.svg)](https://github.com/mzyra98/whiteboardApp/actions/workflows/frontend.yml)
+
 # AplikacjaTablica — frontend (Vite + React 18 + TS)
 
 ## Wymagania

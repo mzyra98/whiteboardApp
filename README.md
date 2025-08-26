@@ -1,97 +1,87 @@
-# WhiteboardApp — collaborative whiteboard (engineering thesis)
+# WhiteboardApp — collaborative whiteboard (praca inżynierska)
 
-Monorepo z aplikacją tablicy do współpracy w czasie rzeczywistym.
+[![backend](https://github.com/mzyra98/whiteboardApp/actions/workflows/backend.yml/badge.svg)](https://github.com/mzyra98/whiteboardApp/actions/workflows/backend.yml)
+[![frontend](https://github.com/mzyra98/whiteboardApp/actions/workflows/frontend.yml/badge.svg)](https://github.com/mzyra98/whiteboardApp/actions/workflows/frontend.yml)
 
-- **Backend**: Spring Boot 3 (Java 21), JPA/Hibernate, MySQL, Flyway, Maven, JUnit 5
-- **Frontend**: React 18 + TypeScript + Vite
+Monorepo aplikacji tablicy do współpracy w czasie rzeczywistym.
+
+- **Backend:** Spring Boot 3 (Java 21), JPA/Hibernate, MySQL, Flyway, Maven, JUnit 5
+- **Frontend:** React 18 + TypeScript + Vite
 
 ---
 
 ## Spis treści
 
-1. [Założenia i zakres](#zalozenia-i-zakres)
-2. [Architektura i moduły](#architektura-i-moduly)
-3. [Wymagania](#wymagania)
-4. [Szybki start (dev)](#szybki-start-dev)
-5. [Konfiguracja środowiska](#konfiguracja-srodowiska)
-6. [Budowanie i uruchamianie](#budowanie-i-uruchamianie)
-7. [Migracje bazy danych (Flyway)](#migracje-bazy-danych-flyway)
-8. [Testy i jakość](#testy-i-jakosc)
-9. [Najważniejsze API (przykłady)](#najwazniejsze-api-przyklady)
-10. [Limitowanie zapytań (rate limiting)](#limitowanie-zapytan-rate-limiting)
-11. [Struktura repozytorium](#struktura-repozytorium)
-12. [Styl, konwencje i git](#styl-konwencje-i-git)
-13. [Uwagi formalne (praca dyplomowa)](#uwagi-formalne-praca-dyplomowa)
-14. [Licencja / prawa](#licencja-prawa)
+1. [Założenia i zakres](#toc-zalozenia-zakres)
+2. [Architektura i moduły](#toc-architektura-moduly)
+3. [Wymagania](#toc-wymagania)
+4. [Szybki start (dev)](#toc-szybki-start)
+5. [Konfiguracja środowiska](#toc-konfiguracja)
+6. [Budowanie i uruchamianie](#toc-budowanie-uruchamianie)
+7. [Migracje bazy danych (Flyway)](#toc-flyway)
+8. [Testy i jakość](#toc-testy-jakosc)
+9. [Najważniejsze API (przykłady)](#toc-api)
+10. [Limitowanie zapytań (rate limiting)](#toc-rate-limiting)
+11. [Struktura repozytorium](#toc-struktura)
+12. [Styl, konwencje i git](#toc-styl-git)
+13. [Uwagi formalne (praca dyplomowa)](#toc-uwagi-formalne)
+14. [Licencja / prawa](#toc-licencja)
 
 ---
 
-<a id="zalozenia-i-zakres"></a>
-## Założenia i zakres
+## <a id="toc-zalozenia-zakres"></a> Założenia i zakres
 
-Celem projektu jest przygotowanie działającej aplikacji „whiteboard” umożliwiającej współdzielenie tablicy oraz zarządzanie dostępami (linki udostępniania, prawa edycji/odczytu) z zachowaniem dobrych praktyk: migracji schematu bazy, testów, limitowania zapytań i spójnego API.
-
----
-
-<a id="architektura-i-moduly"></a>
-## Architektura i moduły
-
-- **Warstwa prezentacji**: React + TypeScript (Vite), katalog `whiteboard-ui/`.
-- **Warstwa usługowa (API)**: Spring Boot 3, pakiet `pl.tablica.wbapp.*`.
-- **Baza danych**: MySQL 8.0 (domyślnie `whiteboard_db`), migracje przez **Flyway**.
-- **Repozytoria**: Spring Data JPA.
-- **Bezpieczeństwo**: nagłówki security Spring (frame-options, x-content-type-options); uproszczona identyfikacja nagłówkiem `X-User-Id` w wybranych endpointach (na potrzeby pracy).
-- **Ochrona przed nadużyciami**: filtr + serwis limitujący częstość dołączeń po tokenie (`FiltrOgraniczaniaDolaczania`, `OgranicznikDolaczania`).
+Celem jest działająca aplikacja „whiteboard” z mechanizmami udostępniania tablic (linki, uprawnienia), statystykami oraz ochroną (limit prób, walidacja), wraz z powtarzalną konfiguracją środowiska, migracjami bazy i CI dla backendu i frontendu.
 
 ---
 
-<a id="wymagania"></a>
-## Wymagania
+## <a id="toc-architektura-moduly"></a> Architektura i moduły
+
+- **Warstwa prezentacji:** React + TypeScript (Vite), katalog `whiteboard-ui/`.
+- **Warstwa usługowa (REST API):** Spring Boot 3, pakiety `pl.tablica.wbapp.*`.
+- **Baza danych:** MySQL 8, migracje przez **Flyway** (`src/main/resources/db/migration`).
+- **Repozytoria:** Spring Data JPA.
+- **Autoryzacja (na potrzeby pracy):** nagłówek `X-User-Id` (liczba całkowita).
+- **CORS:** globalna konfiguracja dla `/api/**` z originami `http://localhost:*`.
+- **Ochrona przed nadużyciami:** filtr i serwis limitujący dołączanie po tokenie.
+
+---
+
+## <a id="toc-wymagania"></a> Wymagania
 
 - **Java** 21 (Temurin/Oracle/OpenJDK)
-- **Maven** 3.9+ (`mvnw`/`mvnw.cmd` w repo)
-- **Node.js** 18+ oraz **npm**/**pnpm**/**yarn** (frontend)
-- **MySQL** 8.0 działający lokalnie (`localhost:3306`)
+- **Maven** 3.9+ (wrappery `mvnw`/`mvnw.cmd`)
+- **MySQL** 8.0 (lokalnie `localhost:3306`)
+- **Node.js** 18+ oraz **npm/pnpm/yarn** (frontend)
 
 ---
 
-<a id="szybki-start-dev"></a>
-## Szybki start (dev)
+## <a id="toc-szybki-start"></a> Szybki start (dev)
 
-1. Utwórz bazę danych:
+1. **Utwórz bazę danych:**
    ```sql
    CREATE DATABASE whiteboard_db
      CHARACTER SET utf8mb4
      COLLATE utf8mb4_unicode_ci;
-Skonfiguruj dostęp (login/hasło) w src/main/resources/application.properties.
+2. **Backend — migracje + uruchomienie:**
 
-Uruchom migracje + backend:
-
-bash
-Kopiuj
-Edytuj
 ./mvnw clean verify
 ./mvnw spring-boot:run
-Aplikacja nasłuchuje pod http://localhost:8080.
 
-Frontend:
 
-bash
-Kopiuj
-Edytuj
+Aplikacja: http://localhost:8080 
+1. **Frontend — dev serwer Vite:**
+
 cd whiteboard-ui
-npm ci          # lub: pnpm i / yarn
+npm ci
 npm run dev
-Dev-serwer Vite: http://localhost:5173.
 
-<a id="konfiguracja-srodowiska"></a>
 
-Konfiguracja środowiska
+Aplikacja: http://localhost:5173
+(lub kolejny wolny port)
+<a id="toc-konfiguracja"></a> Konfiguracja środowiska
+
 src/main/resources/application.properties (przykład):
-
-properties
-Kopiuj
-Edytuj
 spring.datasource.url=jdbc:mysql://localhost:3306/whiteboard_db?useSSL=false&serverTimezone=UTC
 spring.datasource.username=root
 spring.datasource.password=haslo
@@ -104,160 +94,148 @@ spring.flyway.locations=classpath:db/migration
 
 server.port=8080
 
-logging.level.org.springframework.security=INFO
-Uwaga: schemat bazy zarządza Flyway (validate). Nie używamy update ani create-drop w pracy dyplomowej.
-
-<a id="budowanie-i-uruchamianie"></a>
-
-Budowanie i uruchamianie
+Frontend — .env.local:
+VITE_API_BASE_URL=http://localhost:8080
+VITE_USER_ID_DO_TESTOW=9
+<a id="toc-budowanie-uruchamianie"></a> Budowanie i uruchamianie
 Backend
 
 Budowa i testy:
 
-bash
-Kopiuj
-Edytuj
 ./mvnw clean verify
+
+
 Instalacja artefaktu do lokalnego repo:
 
-bash
-Kopiuj
-Edytuj
 ./mvnw install
+
+
 Uruchomienie:
 
-bash
-Kopiuj
-Edytuj
 ./mvnw spring-boot:run
+
+## Instrukcja uruchomienia (skrót)
+
+**Backend**
+
+./mvnw -B -q test
+./mvnw -DskipTests package
+java -jar target/*.jar
+
 Klasa startowa: pl.tablica.wbapp.AplikacjaTablica.
 
-Frontend
-
-bash
-Kopiuj
-Edytuj
+**Frontend**
 cd whiteboard-ui
 npm ci
 npm run dev        # tryb developerski
-npm run build      # produkcyjny bundle
-<a id="migracje-bazy-danych-flyway"></a>
 
-Migracje bazy danych (Flyway)
-Pliki migracji: src/main/resources/db/migration/ (konwencja V__opis.sql).
+npm run build      # produkcyjny bundle
+
+npm run preview    # podgląd buildu
+
+
+(np. http://localhost:4173)
+
+<a id="toc-flyway"></a> Migracje bazy danych (Flyway)
+
+Pliki migracji: src/main/resources/db/migration/ (V__opis.sql).
 
 Walidacja stanu:
 
-bash
-Kopiuj
-Edytuj
 ./mvnw -DskipTests flyway:validate
-<a id="testy-i-jakosc"></a>
 
-Testy i jakość
+<a id="toc-testy-jakosc"></a> Testy i jakość
+
 Testy jednostkowe/integracyjne: JUnit 5 (uruchamiane w mvn verify).
 
-Krytyczne ścieżki: tworzenie użytkownika (/api/uzytkownicy), dołączanie po tokenie (/api/udostepnianie/dolacz), limitowanie (400/429).
+Krytyczne ścieżki: dołączanie po tokenie (POST /api/udostepnianie/dolacz), tworzenie/anulowanie linków, 429.
 
-Analiza statyczna: błędy kompilacji wyeliminowane; ostrzeżenia IDE ograniczone do minimum.
+Analiza statyczna: błędy kompilacji wyeliminowane; ostrzeżenia IDE ograniczone.
 
-<a id="najwazniejsze-api-przyklady"></a>
+<a id="toc-api"></a> Najważniejsze API (przykłady)
 
-Najważniejsze API (przykłady)
-W przykładach stosujemy nagłówek X-User-Id (uproszczona identyfikacja na potrzeby pracy).
+Wszystkie wywołania z nagłówkiem:
 
-1) Rejestracja użytkownika
+X-User-Id: <liczba>
 
-http
-Kopiuj
-Edytuj
-POST /api/uzytkownicy
-X-User-Id: 7
+
+1) Dołączanie do tablicy
+
+POST /api/udostepnianie/dolacz
 Content-Type: application/json
+
+{ "token": "..." }
+
+
+200 → { "tablicaId": number, "uprawnienie": "PODGLAD"|"EDYCJA"|... }
+400/404/429 → błąd w formacie globalnego handlera:
 
 {
-"nazwaWyswietlana": "Jan Kowalski",
-"email": "jan.kowalski@example.com",
-"haslo": "haslo123",
-"rola": "UCZEN"
+"timestamp": "...",
+"status": 429,
+"error": "Too Many Requests",
+"code": "ZA_DUZO_ZADAN",
+"message": "Za dużo prób. Spróbuj ponownie za chwilę."
 }
-Odpowiedź: 200 OK.
 
-2) Dołączanie do tablicy po tokenie (rate-limited)
 
-http
-Kopiuj
-Edytuj
-POST /api/udostepnianie/dolacz
-X-User-Id: 25
+1) Utworzenie linku udostępnienia
+
+POST /api/tablice/{tablicaId}/udostepnij
 Content-Type: application/json
 
-{ "token": "00000000-0000-0000-0000-000000000000" }
-Możliwe kody:
+{ "czasWMinutach": 60, "maksOsob": 5, "uprawnienie": "EDYCJA" }
 
-400 Bad Request – nieprawidłowy/nieistniejący token
 
-429 Too Many Requests – przekroczony limit prób
+201 → { "token": "...", "url": "...", "wygasa": "ISO-8601", "pozostaloWejsc": 5 }
 
-200 OK – dołączenie zakończone powodzeniem (zwracane tablicaId i uprawnienie)
+1) Lista aktywnych linków
 
-<a id="limitowanie-zapytan-rate-limiting"></a>
+GET /api/tablice/{tablicaId}/udostepnienia
 
-Limitowanie zapytań (rate limiting)
-Za ochronę odpowiada duet:
 
-FiltrOgraniczaniaDolaczania – OncePerRequestFilter na ścieżce /api/udostepnianie/dolacz
+1) Anulowanie linku
 
-OgranicznikDolaczania – współdzielony serwis z oknem czasowym per IP+token
+DELETE /api/udostepnianie/anuluj/{token}
 
-Parametry (tryb produkcyjny w kodzie):
+
+204 (no content)
+
+1) Statystyki tablicy
+
+GET /api/statystyki/tablice/{id}
+
+
+200 → JSON (prezentowany jako „pretty JSON” w UI).
+
+<a id="toc-rate-limiting"></a> Limitowanie zapytań (rate limiting)
+
+Filtr FiltrOgraniczaniaDolaczania (OncePerRequestFilter) chroni POST /api/udostepnianie/dolacz.
+
+Serwis OgranicznikDolaczania liczy próby w oknie czasowym per IP+token.
+
+Parametry (wartości w kodzie):
 
 MAKS_PROB_W_OKNIE = 10 prób
 
-OKNO_MS = 60_000 ms
+OKNO_MS = 60000 ms
+Przekroczenie → wyjątek i odpowiedź HTTP 429.
+<a id="toc-styl-git"></a> Styl, konwencje i git
 
-Przekroczenie limitu → wyjątek ZbytWieleProb i odpowiedź HTTP 429 (JSON).
+Java: DTO w dto, kontrolery w kontroler, usługi w usluga, wyjątki w wyjatek.
 
-<a id="struktura-repozytorium"></a>
-
-Struktura repozytorium
-bash
-Kopiuj
-Edytuj
-whiteboardApp/
-├─ src/
-│  ├─ main/java/pl/tablica/wbapp/...
-│  ├─ main/resources/
-│  │  └─ db/migration/         # skrypty Flyway
-│  └─ test/java/pl/tablica/wbapp/...
-├─ whiteboard-ui/               # frontend (React + TS + Vite)
-│  ├─ src/
-│  └─ package.json
-├─ pom.xml
-└─ README.md
-<a id="styl-konwencje-i-git"></a>
-
-Styl, konwencje i git
-Java: klasy/pakiety zgodnie z konwencją; DTO w dto, kontrolery w kontroler, usługi w usluga, wyjątki w wyjatek.
-
-Commity: krótki imperatyw po angielsku (np. feat: ..., fix: ..., chore: ...).
+Commity: krótki imperatyw (np. feat: ..., fix: ..., chore: ...).
 
 .gitignore: bez artefaktów buildów (/target, whiteboard-ui/dist, .idea, itp.).
 
-Branch: gałąź domyślna main; na GitHub włączone ograniczenia (pull request, blokada force-push).
+Branch: domyślna main; GitHub Actions dla backendu i frontendu.
 
-<a id="uwagi-formalne-praca-dyplomowa"></a>
+<a id="toc-uwagi-formalne"></a> Uwagi formalne (praca dyplomowa)
 
-Uwagi formalne (praca dyplomowa)
-Repozytorium jest prywatne (wymóg formalny). Do pracy pisemnej dołączono zrzuty ekranów i logi z Maven/Spring.
-README obejmuje: cel, architekturę, technologie, proces budowania, konfigurację DB oraz kluczowe API — tak by recenzent mógł odtworzyć środowisko i zweryfikować ścieżki (w tym odpowiedź 429).
+Repozytorium zawiera kompletną konfigurację buildów i CI.
+Instrukcja odtworzenia środowiska, migracje oraz przykłady kluczowych endpointów pozwalają na weryfikację działania (w tym ścieżek 400/404/429). Repo może być prywatne zgodnie z wymaganiami uczelni.
 
-<a id="licencja-prawa"></a>
+<a id="toc-licencja"></a> Licencja / prawa
 
-Licencja / prawa
-Kod i materiały stanowią element pracy inżynierskiej.
+Kod stanowi element pracy inżynierskiej autora.
 Udostępnianie osobom trzecim wyłącznie za zgodą autora/opiekuna pracy.
-
-markdown
-Kopiuj
-Edytuj
