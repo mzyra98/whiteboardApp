@@ -1,58 +1,31 @@
-# --- ROOT ---
-HELP.md
-
-# --- Maven / Java ---
-target/
-# Zostaw wrapper w repo dla powtarzalnych buildów:
-!.mvn/wrapper/maven-wrapper.jar
-!.mvn/wrapper/maven-wrapper.properties
-
-# Logi / tymczasowe
-logs/
+# Logs
+logs
 *.log
-*.tmp
-*.bak
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# IDE
-.idea/
-*.iml
-*.iws
-*.ipr
-out/
-bin/
+# Node outputs
+node_modules
+dist
+build
+coverage
+*.local
+.vite/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
 
-# System
+# Editor & OS
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
 
-# Test reports
-surefire-reports/
-failsafe-reports/
-target/site/
-jacoco.exec
-
-# --- Frontend (whiteboard-ui) ---
-whiteboard-ui/node_modules/
-whiteboard-ui/.next/
-whiteboard-ui/.parcel-cache/
-whiteboard-ui/.turbo/
-whiteboard-ui/.vite/
-whiteboard-ui/.cache/
-whiteboard-ui/dist/
-whiteboard-ui/build/
-whiteboard-ui/coverage/
-whiteboard-ui/.eslintcache
-whiteboard-ui/.stylelintcache
-whiteboard-ui/yarn-error.log
-whiteboard-ui/npm-debug.log
-whiteboard-ui/pnpm-debug.log
-
-# Env / sekrety
+# Env files
 *.env
 *.env.*
-whiteboard-ui/.env
-whiteboard-ui/.env.*
 
-# Inne buildy
-**/build/
-**/dist/

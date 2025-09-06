@@ -13,7 +13,8 @@ import pl.tablica.wbapp.model.Tablica;
 import pl.tablica.wbapp.repozytorium.RepozytoriumKontaUzytkownika;
 import pl.tablica.wbapp.repozytorium.RepozytoriumPociagniec;
 import pl.tablica.wbapp.repozytorium.RepozytoriumTablicy;
-
+import pl.tablica.wbapp.wyjatek.ErrorCode;
+import pl.tablica.wbapp.wyjatek.WyjatekAplikacji;
 import java.util.List;
 
 @Service
@@ -36,9 +37,21 @@ public class SerwisKontaUzytkownika {
 
     @Transactional
     public Long utworz(NoweKontoUzytkownikaDto dane) {
-        repozytorium.findByEmail(dane.email).ifPresent(u -> {
-            throw new IllegalArgumentException("Email jest już używany: " + dane.email);
+        repozytorium.findByEmailIgnoreCase(dane.email).ifPresent(u -> {
+            throw new WyjatekAplikacji(
+                    ErrorCode.EMAIL_ZAJETY,
+                    "Email '" + dane.email + "' jest już używany."
+            );
         });
+
+        if (dane.nazwaWyswietlana != null && !dane.nazwaWyswietlana.isBlank()) {
+            repozytorium.findByNazwaWyswietlanaIgnoreCase(dane.nazwaWyswietlana).ifPresent(u -> {
+                throw new WyjatekAplikacji(
+                        ErrorCode.NAZWA_UZYTKOWNIKA_ZAJETA,
+                        "Nazwa użytkownika '" + dane.nazwaWyswietlana + "' jest już zajęta."
+                );
+            });
+        }
 
         var konto = new KontoUzytkownika();
         konto.setDisplayName(dane.nazwaWyswietlana);
@@ -66,7 +79,10 @@ public class SerwisKontaUzytkownika {
     @Transactional
     public void zmienRole(Long idUzytkownika, RolaUzytkownika rola) {
         var u = repozytorium.findById(idUzytkownika)
-                .orElseThrow(() -> new IllegalArgumentException("Nie znaleziono użytkownika id=" + idUzytkownika));
+                .orElseThrow(() -> new WyjatekAplikacji(
+                        ErrorCode.NIE_ZNALEZIONO_REKORDU,
+                        "Nie znaleziono użytkownika id=" + idUzytkownika
+                ));
         u.setRola(rola);
         repozytorium.save(u);
     }
@@ -74,12 +90,18 @@ public class SerwisKontaUzytkownika {
     @Transactional
     public void usun(Long idUzytkownika, boolean force) {
         if (!repozytorium.existsById(idUzytkownika)) {
-            throw new IllegalArgumentException("Nie znaleziono użytkownika id=" + idUzytkownika);
+            throw new WyjatekAplikacji(
+                    ErrorCode.NIE_ZNALEZIONO_REKORDU,
+                    "Nie znaleziono użytkownika id=" + idUzytkownika
+            );
         }
 
         List<Tablica> tablice = repoTablicy.findByWlasciciel_Id(idUzytkownika);
         if (!tablice.isEmpty() && !force) {
-            throw new IllegalArgumentException("Użytkownik ma przypisane tablice. Użyj force=true aby usunąć wraz z danymi.");
+            throw new WyjatekAplikacji(
+                    ErrorCode.UZYTKOWNIK_MA_TABLICE,
+                    "Użytkownik ma przypisane tablice – ustaw force=true, aby usunąć wraz z jego danymi."
+            );
         }
 
         if (!tablice.isEmpty()) {
@@ -99,5 +121,3 @@ public class SerwisKontaUzytkownika {
         return dto;
     }
 }
-
-

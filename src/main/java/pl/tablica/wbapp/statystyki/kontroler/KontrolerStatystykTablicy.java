@@ -1,12 +1,13 @@
 package pl.tablica.wbapp.statystyki.kontroler;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import pl.tablica.wbapp.statystyki.dto.StatystykiTablicyDto;
 import pl.tablica.wbapp.statystyki.usluga.SerwisStatystykTablicy;
 
 @RestController
-@RequestMapping("/api/tablice")
 public class KontrolerStatystykTablicy {
 
     private final SerwisStatystykTablicy serwis;
@@ -15,8 +16,13 @@ public class KontrolerStatystykTablicy {
         this.serwis = serwis;
     }
 
-    @GetMapping("/{id}/statystyki")
-    public ResponseEntity<StatystykiTablicyDto> statystyki(@PathVariable Long id, @RequestHeader("X-User-Id") Long userId) {
-        return ResponseEntity.ok(serwis.pobierzDla(id, userId));
+    @GetMapping("/api/statystyki/tablice/{id}")
+    public ResponseEntity<StatystykiTablicyDto> statystykiNowa(@PathVariable Long id) {
+        return ResponseEntity.ok(serwis.pobierzDla(id));
+    }
+
+    @GetMapping("/api/tablice/{id}/statystyki")
+    public ResponseEntity<StatystykiTablicyDto> statystykiStara(@PathVariable Long id) {
+        return ResponseEntity.ok(serwis.pobierzDla(id));
     }
 }

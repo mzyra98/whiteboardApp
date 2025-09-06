@@ -45,7 +45,7 @@ public class KontrolerTablicy {
     public ResponseEntity<Page<TablicaDto>> lista(
             @AuthenticationPrincipal KontoUzytkownika zalogowany,
             @RequestParam(required = false) Long wlascicielId,
-            @PageableDefault(size = 10, sort = "createdAt") Pageable pageable) {
+            @PageableDefault(sort = "createdAt") Pageable pageable) {
 
         if (zalogowany == null) {
             throw new IllegalArgumentException("Brak zalogowanego użytkownika.");

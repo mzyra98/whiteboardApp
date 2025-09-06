@@ -33,7 +33,6 @@ public class KontrolerKontaUzytkownika {
         return ResponseEntity.ok(serwis.lista());
     }
 
-    // Zwraca informacje o aktualnie zalogowanym użytkowniku
     @GetMapping("/me")
     public ResponseEntity<Map<String, Object>> me(
             @AuthenticationPrincipal KontoUzytkownika zalogowany) {

@@ -1,24 +1,62 @@
-# Logs
-logs
+# --- Maven / Java (backend) ---
+target/
+logs/
 *.log
+*.tmp
+*.bak
+
+# wrapper Maven – trzymaj w repo dla powtarzalnych buildów
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# Raporty testów / site
+surefire-reports/
+failsafe-reports/
+target/site/
+jacoco.exec
+
+# Bazy H2 i ślady
+*.h2.db
+*.mv.db
+*.trace.db
+
+# --- Frontend (node) w root ---
+node_modules/
+dist/
+build/
+coverage/
+.vite/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Pliki środowiskowe (sekrety)
+*.env
+*.env.*
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# --- IDE / system ---
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+out/
+bin/
+
+# --- HTTP Client (artefakty i ciasteczka; same .http zostają w repo) ---
+httpRequests/*.json
+httpRequests/*.png
+httpRequests/*.pdf
+httpRequests/http-client.cookies
+
+# Jeśli ktoś trzyma prywatne env poza .idea
+http-client.env.json
+http-client.private.env.json
+

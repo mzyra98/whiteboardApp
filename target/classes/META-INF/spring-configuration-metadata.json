@@ -1,0 +1,110 @@
+{
+  "groups": [
+    {
+      "name": "bezpieczenstwo.jwt",
+      "type": "pl.tablica.wbapp.konfiguracja.WlasciwosciJwt",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciJwt"
+    },
+    {
+      "name": "cors",
+      "type": "pl.tablica.wbapp.konfiguracja.WlasciwosciCors",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciCors"
+    },
+    {
+      "name": "tablica.limity",
+      "type": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic"
+    },
+    {
+      "name": "tablica.limity.admin",
+      "type": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic",
+      "sourceMethod": "getAdmin()"
+    },
+    {
+      "name": "tablica.limity.nauczyciel",
+      "type": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic",
+      "sourceMethod": "getNauczyciel()"
+    },
+    {
+      "name": "tablica.limity.uczen",
+      "type": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic",
+      "sourceMethod": "getUczen()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "bezpieczenstwo.jwt.access-czas-sekundy",
+      "type": "java.lang.Long",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciJwt"
+    },
+    {
+      "name": "bezpieczenstwo.jwt.issuer",
+      "type": "java.lang.String",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciJwt"
+    },
+    {
+      "name": "bezpieczenstwo.jwt.refresh-czas-sekundy",
+      "type": "java.lang.Long",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciJwt"
+    },
+    {
+      "name": "bezpieczenstwo.jwt.tajny",
+      "type": "java.lang.String",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciJwt"
+    },
+    {
+      "name": "cors.dozwolone",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciCors"
+    },
+    {
+      "name": "tablica.limity.admin.max-czas-trwania",
+      "type": "java.time.Duration",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    },
+    {
+      "name": "tablica.limity.admin.max-tablic",
+      "type": "java.lang.Integer",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    },
+    {
+      "name": "tablica.limity.admin.max-uczestnikow-na-tablice",
+      "type": "java.lang.Integer",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    },
+    {
+      "name": "tablica.limity.nauczyciel.max-czas-trwania",
+      "type": "java.time.Duration",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    },
+    {
+      "name": "tablica.limity.nauczyciel.max-tablic",
+      "type": "java.lang.Integer",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    },
+    {
+      "name": "tablica.limity.nauczyciel.max-uczestnikow-na-tablice",
+      "type": "java.lang.Integer",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    },
+    {
+      "name": "tablica.limity.uczen.max-czas-trwania",
+      "type": "java.time.Duration",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    },
+    {
+      "name": "tablica.limity.uczen.max-tablic",
+      "type": "java.lang.Integer",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    },
+    {
+      "name": "tablica.limity.uczen.max-uczestnikow-na-tablice",
+      "type": "java.lang.Integer",
+      "sourceType": "pl.tablica.wbapp.konfiguracja.WlasciwosciLimitowTablic$Zestaw"
+    }
+  ],
+  "hints": []
+}
