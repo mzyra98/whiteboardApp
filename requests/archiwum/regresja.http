@@ -1,0 +1,130 @@
+### Konfiguracja
+@host = http://localhost:8080
+@adminId = 7
+@userId = 29
+@badToken = 00000000-0000-0000-0000-000000000000
+@json = application/json
+
+### Healthcheck aplikacji
+GET {{host}}/actuator/health
+
+###
+
+### [ADMIN] Utworzenie użytkownika (rejestracja)
+POST {{host}}/api/uzytkownicy
+X-User-Id: {{adminId}}
+Content-Type: {{json}}
+
+{
+  "nazwaWyswietlana": "Spammer {{timestamp}}",
+  "email": "spammer+{{timestamp}}-{{uuid}}@example.com",
+  "haslo": "haslo123",
+  "rola": "UCZEN"
+}
+
+###
+
+### [UCZEŃ] Próba dołączenia przez nieprawidłowy token (400 spodziewane)
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+### [UCZEŃ] Próby przekroczenia limitu (rate-limit) – 11 wywołań, ostatnie powinny zwrócić 429
+# Window wg limiter'a: 10 prób / 60 sekund (aktualne wartości w OgranicznikDolaczania)
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+POST {{host}}/api/udostepnianie/dolacz
+X-User-Id: {{userId}}
+Content-Type: {{json}}
+
+{ "token": "{{badToken}}" }
+
+###
+
+### [ADMIN] Usunięcie użytkownika testowego (force=true)
+DELETE {{host}}/api/admin/uzytkownicy/{{userId}}?force=true
+X-User-Id: {{adminId}}
+
+###

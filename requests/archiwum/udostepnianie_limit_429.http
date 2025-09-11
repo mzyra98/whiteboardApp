@@ -1,0 +1,139 @@
+### 0) ADMIN tworzy tymczasowego „spammera” i zapisuje {{id_spammer}}
+POST http://localhost:8080/api/uzytkownicy
+X-User-Id: 7
+Content-Type: application/json
+
+{
+  "nazwaWyswietlana": "Spammer {{$timestamp}}",
+  "email": "spammer+{{$timestamp}}-{{$uuid}}@example.com",
+  "haslo": "haslo123",
+  "rola": "UCZEN"
+}
+
+> {%
+    const raw = response.body;
+    let id = null;
+
+    function pickId(p) {
+        if (p == null) return null;
+        if (typeof p === 'number') return p;
+        if (typeof p === 'string') {
+            const m = p.match(/\d+/);
+            return m ? Number(m[0]) : null;
+        }
+        if (typeof p === 'object' && 'id' in p) return p.id;
+        return null;
+    }
+
+    try {
+        id = typeof raw === 'string' ? pickId(JSON.parse(raw)) : pickId(raw);
+    } catch (_) {
+        id = pickId(raw);
+    }
+
+    if (!id) { throw new Error("Brak id spammera (#0)"); }
+    client.global.set("id_spammer", String(id));
+%}
+
+###
+
+### Ustaw stały, poprawnie sformatowany, ale nieistniejący token (UUID)
+# Używamy takiego samego w każdej próbie, żeby uruchomić limiter.
+@invalid_token=00000000-0000-0000-0000-000000000000
+
+### 1) Próba dołączenia złym tokenem (spodziewaj się 400/404; po progu 429)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 2)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 3)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 4)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 5)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 6)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 7)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 8)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 9)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 10)
+POST http://localhost:8080/api/udostepnianie/dolacz
+X-User-Id: {{id_spammer}}
+Content-Type: application/json
+
+{ "token": "{{invalid_token}}" }
+
+###
+
+### 11) SPRZĄTANIE – ADMIN usuwa tymczasowego (204/200)
+DELETE http://localhost:8080/api/admin/uzytkownicy/{{id_spammer}}?force=true
+X-User-Id: 7
+
+
+

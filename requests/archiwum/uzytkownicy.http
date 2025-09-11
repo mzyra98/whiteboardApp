@@ -1,0 +1,114 @@
+### 1) ADMIN tworzy tymczasowego użytkownika (200/201) i zapisuje {{id_tmp}}
+POST http://localhost:8080/api/uzytkownicy
+X-User-Id: 7
+Content-Type: application/json
+
+{
+  "nazwaWyswietlana": "Tymczasowy",
+  "email": "tymczasowy+{{$timestamp}}-{{$uuid}}@example.com",
+  "haslo": "haslo123",
+  "rola": "UCZEN"
+}
+
+> {%
+    const raw = response.body;
+    let body = raw;
+    try { if (typeof raw === 'string') body = JSON.parse(raw); } catch (e) {}
+    let idVal = null;
+    if (body && typeof body === 'object' && body.id != null) idVal = body.id;
+    else if (typeof body === 'number') idVal = body;
+    else if (typeof raw === 'string' && /^\d+$/.test(raw.trim())) idVal = raw.trim();
+    if (!idVal) { throw new Error("Brak id w odpowiedzi #1"); }
+    client.global.set("id_tmp", String(idVal));
+%}
+
+###
+
+### 2) ADMIN pobiera listę użytkowników (200)
+GET http://localhost:8080/api/admin/uzytkownicy?page=0&size=10&sort=id,asc
+X-User-Id: 7
+
+###
+
+### 3) ADMIN zmienia rolę tymczasowego na NAUCZYCIEL (204/200)
+PUT http://localhost:8080/api/admin/uzytkownicy/{{id_tmp}}/rola
+X-User-Id: 7
+Content-Type: application/json
+
+{ "rola": "NAUCZYCIEL" }
+
+> {%
+    if (!client.global.get("id_tmp")) { throw new Error("Najpierw uruchom #1 – brak id_tmp"); }
+%}
+
+###
+
+### 4) ADMIN usuwa tymczasowego bez force (204/200 lub 409 jeśli są powiązania)
+DELETE http://localhost:8080/api/admin/uzytkownicy/{{id_tmp}}
+X-User-Id: 7
+
+###
+
+### 5) (URUCHAMIAJ TYLKO GDY #4 zwrócił 409) ADMIN usuwa z wymuszeniem (204/200)
+DELETE http://localhost:8080/api/admin/uzytkownicy/{{id_tmp}}?force=true
+X-User-Id: 7
+
+###
+
+### 6) Weryfikacja – tymczasowego nie ma na liście (200, brak na liście)
+GET http://localhost:8080/api/admin/uzytkownicy?page=0&size=50&sort=id,asc
+X-User-Id: 7
+
+###
+
+### 7) NAUCZYCIEL (id=5) tworzy użytkownika (200/201)
+POST http://localhost:8080/api/uzytkownicy
+X-User-Id: 5
+Content-Type: application/json
+
+{
+  "nazwaWyswietlana": "UczenZgloszonyPrzezNauczyciela",
+  "email": "zgloszony+{{$timestamp}}-{{$uuid}}@example.com",
+  "haslo": "haslo123",
+  "rola": "UCZEN"
+}
+
+> {%
+    const raw = response.body;
+    let body = raw;
+    try { if (typeof raw === 'string') body = JSON.parse(raw); } catch (e) {}
+    let idVal = null;
+    if (body && typeof body === 'object' && body.id != null) idVal = body.id;
+    else if (typeof body === 'number') idVal = body;
+    else if (typeof raw === 'string' && /^\d+$/.test(raw.trim())) idVal = raw.trim();
+    if (!idVal) { throw new Error("Brak id w odpowiedzi #7"); }
+    client.global.set("id_uczen_nauczyciela", String(idVal));
+%}
+
+###
+
+### 8) NAUCZYCIEL próbuje listy admina (401/403)
+GET http://localhost:8080/api/admin/uzytkownicy?page=0&size=10
+X-User-Id: 5
+
+###
+
+### 9) UCZEŃ (id=1) próbuje tworzyć użytkownika (401/403)
+POST http://localhost:8080/api/uzytkownicy
+X-User-Id: 1
+Content-Type: application/json
+
+{
+  "nazwaWyswietlana": "NiepowinnoPrzejsc",
+  "email": "blokada+{{$timestamp}}-{{$uuid}}@example.com",
+  "haslo": "haslo123",
+  "rola": "UCZEN"
+}
+
+###
+
+### 10) ADMIN sprząta – usuwa konto z pkt 7 (204/200)
+DELETE http://localhost:8080/api/admin/uzytkownicy/{{id_uczen_nauczyciela}}?force=true
+X-User-Id: 7
+
+

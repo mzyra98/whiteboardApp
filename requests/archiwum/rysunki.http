@@ -1,0 +1,37 @@
+### 0) Wymagane: {{tablica_id}} ustawione (np. z tablice.http)
+
+### 1) Dodaj pociągnięcie LINIA jako UCZEŃ (200/201)
+POST http://localhost:8080/api/rysunki
+X-User-Id: 1
+Content-Type: application/json
+
+{
+  "tablicaId": {{tablica_id}},
+  "autorId": 1,
+  "typ": "LINIA",
+  "dane": "{\"x1\":10,\"y1\":10,\"x2\":120,\"y2\":25,\"kolor\":\"#222\",\"grubosc\":3}"
+}
+
+###
+
+### 2) GET listy pociągnięć (200, co najmniej 1 wpis)
+GET http://localhost:8080/api/rysunki?tablicaId={{tablica_id}}
+X-User-Id: 1
+
+###
+
+### 3) NEGATYWNY: czyszczenie przez NAUCZYCIELA (403)
+DELETE http://localhost:8080/api/rysunki?tablicaId={{tablica_id}}
+X-User-Id: 5
+
+###
+
+### 4) Czyszczenie przez ADMINA (204/200)
+DELETE http://localhost:8080/api/rysunki?tablicaId={{tablica_id}}
+X-User-Id: 7
+
+###
+
+### 5) GET po czyszczeniu (200, [])
+GET http://localhost:8080/api/rysunki?tablicaId={{tablica_id}}
+X-User-Id: 1

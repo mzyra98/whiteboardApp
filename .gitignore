@@ -28,4 +28,5 @@ coverage
 # Env files
 *.env
 *.env.*
+.idea/httpRequests/http-client.private.env.json
 

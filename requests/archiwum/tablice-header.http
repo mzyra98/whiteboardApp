@@ -1,0 +1,43 @@
+@baseUrl = http://localhost:8080
+@userId = 1
+@tablicaId = 1
+
+### Lista
+GET http://localhost:8080/api/tablice
+X-User-Id: 1
+
+### Utwórz
+POST http://localhost:8080/api/tablice
+X-User-Id: 1
+Content-Type: application/json
+
+{ "nazwa": "Debug", "opis": "Test" }
+
+
+
+> {%
+    const id = (response.body && (response.body.id || response.body.tablicaId));
+    if (id) client.global.set("tablicaId", String(id));
+%}
+
+### 3A) Eksport JSON (wybierz działającą ścieżkę)
+GET {{baseUrl}}/api/tablice/{{tablicaId}}/eksport?format=json
+X-User-Id: {{userId}}
+
+### 3B) Eksport globalny
+GET {{baseUrl}}/api/eksport?format=json
+X-User-Id: {{userId}}
+
+### 4) Import JSON
+POST {{baseUrl}}/api/import
+X-User-Id: {{userId}}
+Content-Type: application/json
+
+{
+  "format": "json",
+  "dane": {
+    "tablice": [
+      { "nazwa": "Import A", "opis": "", "warstwy": [] }
+    ]
+  }
+}

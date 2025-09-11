@@ -1,0 +1,93 @@
+GET {{baseUrl}}/actuator/health
+X-User-Id: {{userId}}
+
+### 0) Diagnoza – czy backend żyje (Spring Actuator)
+GET {{baseUrl}}/actuator/health
+
+### 0.1) (Opcjonalnie) Rejestracja – odpal TYLKO jeśli konto nie istnieje
+# POST {{baseUrl}}/api/auth/rejestruj
+# Content-Type: application/json
+#
+# {
+#   "email": "{{email}}",
+#   "haslo": "{{haslo}}",
+#   "rola":  "NAUCZYCIEL"
+# }
+
+### 1) Logowanie – zapisuje {{jwt}}
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "haslo": "{{haslo}}"
+}
+
+> {%
+
+
+try {
+  const ct = (response.headers['Content-Type'] || response.headers['content-type'] || '').toLowerCase();
+  if (response.status !== 200 || !ct.includes('application/json')) {
+    client.global.set('jwt', '');
+    throw new Error('Logowanie nieudane: ' + response.status);
+  }
+  const body = JSON.parse(response.body);
+  if (!body || !body.token) {
+    client.global.set('jwt', '');
+    throw new Error("Brak pola 'token' w odpowiedzi logowania.");
+  }
+  client.global.set('jwt', body.token);
+  console.log('JWT zapisany.');
+} catch (e) {
+  client.global.set('jwt', '');
+  throw e;
+}
+%}
+
+### 2) Import pustej tablicy – zapisuje {{tablicaId}}
+POST {{baseUrl}}/api/tablice/import?email={{email}}
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "schema": "pl.tablica.export",
+  "version": 1,
+  "tytul": "Tablica testowa (eksport/import)",
+  "wlascicielEmail": "{{email}}",
+  "strokes": []
+}
+
+> {%
+    try {
+        const ct = (response.headers['Content-Type'] || response.headers['content-type'] || '').toLowerCase();
+        if (response.status !== 200 || !ct.includes('application/json')) {
+            throw new Error('Import nieudany: ' + response.status);
+        }
+        const body = JSON.parse(response.body);
+        const id = body?.id ?? body?.tablicaId ?? body?.tablica?.id;
+        if (!id) {
+            throw new Error("Brak 'id' w odpowiedzi z importu.");
+        }
+        client.global.set('tablicaId', String(id));
+        console.log('tablicaId = ' + client.global.get('tablicaId'));
+    } catch (e) {
+        throw e;
+    }
+%}
+
+### 3) Eksport JSON tablicy
+GET {{baseUrl}}/api/tablice/{{tablicaId}}/export
+Authorization: Bearer {{jwt}}
+
+### 4) Eksport PNG tablicy (1600x900)
+GET {{baseUrl}}/api/tablice/{{tablicaId}}/export.png?width=1600&height=900
+Authorization: Bearer {{jwt}}
+
+### 5) Eksport PDF tablicy (1600x900)
+GET {{baseUrl}}/api/tablice/{{tablicaId}}/export.pdf?width=1600&height=900
+Authorization: Bearer {{jwt}}
+
+### 6) (Diag) Odczyt tablicy po ID – szybka weryfikacja zapisu
+GET {{baseUrl}}/api/tablice/{{tablicaId}}
+Authorization: Bearer {{jwt}}

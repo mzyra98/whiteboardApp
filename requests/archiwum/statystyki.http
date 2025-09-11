@@ -1,0 +1,28 @@
+### Konfiguracja
+@host = http://localhost:8080
+@adminId = 7
+@tablicaId = 11
+
+### Pobranie statystyk tablicy – wariant 1 (ścieżka z path variable)
+GET {{host}}/api/statystyki/tablicy/{{tablicaId}}
+X-User-Id: {{adminId}}
+
+###
+
+### Pobranie statystyk tablicy – wariant 2 (ścieżka z parametrem)
+GET {{host}}/api/statystyki/tablicy?tablicaId={{tablicaId}}
+X-User-Id: {{adminId}}
+
+###
+
+### Przykładowa odpowiedź (dla referencji)
+# {
+#   "tablicaId": 1,
+#   "liczbaWspolpracownikow": 5,
+#   "liczbaZaproszen": 12,
+#   "liczbaZadan": 23,
+#   "liczbaZadanZakonczonych": 17,
+#   "ostatniaAktywnosc": "2025-08-18T21:30:45Z"
+# }
+
+###
