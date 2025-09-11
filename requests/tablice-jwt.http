@@ -1,9 +1,10 @@
-@baseUrl = http://localhost:8080
-@email = nauczyciel@local
-@haslo = nauczyciel123
+@baseUrl = {{baseUrl}}
+@email = {{email}}
+@haslo = {{haslo}}
+@auth = Bearer {{jwt}}
 @tablicaId = 1
 
-### 1) LOGIN → zapisuje {{jwt}}
+### 1) LOGIN → zapisuje {{jwt}} i {{auth}}
 POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
 
@@ -12,44 +13,11 @@ Content-Type: application/json
 > {%
     const b = response.body || {};
     const t = b.jwt || b.token || b.accessToken || (b.data && (b.data.jwt || b.data.token || b.data.accessToken));
-    if (!t) { throw new Error("Brak tokena w odpowiedzi"); }
+    if (!t) throw new Error("Brak tokena w odpowiedzi");
     client.global.set("jwt", t);
+    client.global.set("auth", "Bearer " + t);
 %}
 
 ### 2) LISTA
 GET {{baseUrl}}/api/tablice
-Authorization: Bearer {{jwt}}
-
-### 3) UTWÓRZ
-POST {{baseUrl}}/api/tablice
-Authorization: Bearer {{jwt}}
-Content-Type: application/json
-
-{ "nazwa": "Debug JWT", "opis": "Test" }
-
-> {%
-    const id = (response.body && (response.body.id || response.body.tablicaId));
-    if (id) client.global.set("tablicaId", String(id));
-%}
-
-### 4A) EKSPORT JSON po ID
-GET {{baseUrl}}/api/tablice/{{tablicaId}}/eksport?format=json
-Authorization: Bearer {{jwt}}
-
-### 4B) EKSPORT JSON globalny
-GET {{baseUrl}}/api/eksport?format=json
-Authorization: Bearer {{jwt}}
-
-### 5) IMPORT JSON
-POST {{baseUrl}}/api/import
-Authorization: Bearer {{jwt}}
-Content-Type: application/json
-
-{
-  "format": "json",
-  "dane": {
-    "tablice": [
-      { "nazwa": "Import JWT", "opis": "", "warstwy": [] }
-    ]
-  }
-}
+Authorization: {{auth}}
