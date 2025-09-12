@@ -1,20 +1,10 @@
-GET http://localhost:8080/actuator/health
-X-User-Id: 2
+GET http://localhost:8080/api/uzytkownicy/whoami
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDQwMjAsImV4cCI6MTc1NzY0NDkyMCwidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.pBl9H-aEhgHSeKU3S69w6hkiMv7izDc2uEQi20tB96o
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-<> 2025-09-11T194413.500.json
-
-###
-
-GET http://localhost:8080/api/tablice
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MTIzODMsImV4cCI6MTc1NzYxMzI4MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.KlolShKfIEHH0epFU_RgYcu-IDFNNBVN19A80-jVX48
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2025-09-11T193950.400.json
+<> 2025-09-12T042709.500.html
 
 ###
 
@@ -27,40 +17,17 @@ Accept: */*
 
 { "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-11T193943.200.json
+<> 2025-09-12T042700.200.json
 
 ###
 
-GET http://localhost:8080/api/tablice
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MTIwMDQsImV4cCI6MTc1NzYxMjkwNCwidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.p-DTPgwVF9kGMCSUn72xo260aVjs4_KgTP4DpLgdHQs
+GET http://localhost:8080/api/uzytkownicy/whoami
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDMyNjgsImV4cCI6MTc1NzY0NDE2OCwidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.mFS-KmrrBHoYvTFIDUPqMqddCAedfojTNkB9pz49Lfs
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-<> 2025-09-11T193353.400.json
-
-###
-
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-Content-Length: 57
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
-
-<> 2025-09-11T193324.200.json
-
-###
-
-GET http://localhost:8080/api/tablice
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MTE4MjMsImV4cCI6MTc1NzYxMjcyMywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.H6bwjvI2lKQgEexZyUbHEhUYjqIMsUgU9jZf4C_lCZc
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2025-09-11T193125.400.json
+<> 2025-09-12T041432.500.html
 
 ###
 
@@ -73,230 +40,176 @@ Accept: */*
 
 { "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-11T193023.200.json
+<> 2025-09-12T041428.200.json
 
 ###
 
-POST http://localhost:8080/api/auth/login
+POST http://localhost:8080/api/import
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 Content-Type: application/json
-Content-Length: 57
+Content-Length: 115
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
-
-<> 2025-09-11T191633.200.json
+{
+  "format": "JSON",
+  "dane": { "tablice": [ { "tytul": "Import 1757642983", "nazwa": "Import 1757642983" } ] }
+}
 
 ###
 
 GET http://localhost:8080/api/tablice
-X-User-Id: 1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
 ###
 
-GET http://localhost:8080/actuator/health
-X-User-Id: 1
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2025-09-11T190709.500.json
-
-###
-
-GET http://localhost:8080/actuator/health
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2025-09-10T230007.500.json
-
-###
-
-GET http://localhost:8080/actuator/health
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2025-09-10T224639.500.json
-
-###
-
-GET http://localhost:8080/actuator/health
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2025-09-06T194613.500.json
-
-###
-
-POST http://localhost:8080/api/auth/login
+POST http://localhost:8080/api/import
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 Content-Type: application/json
-Content-Length: 57
+Content-Length: 131
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
 {
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!"
+  "format": "JSON",
+  "dane": {
+    "tablice": [
+      { "tytul": "Import 1757642385", "nazwa": "Import 1757642385" }
+    ]
+  }
 }
-
-<> 2025-09-06T192828.401.json
 
 ###
 
-POST http://localhost:8080/api/auth/login
+POST http://localhost:8080/api/import
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 Content-Type: application/json
-Content-Length: 57
+Content-Length: 105
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
 {
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!"
-}
-
-<> 2025-09-06T192752.401.json
-
-###
-
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-Content-Length: 57
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!"
-}
-
-<> 2025-09-06T191708.401.json
-
-###
-
-POST http://localhost:8080/api/tablice/import?email=nauczyciel@local
-Content-Type: application/json
-Authorization: Bearer
-Content-Length: 249
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Tablica testowa (pusta)",
-  "wlascicielEmail": "nauczyciel@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": []
+  "format": "json",
+  "dane": { "tablice": [ { "nazwa": "Import JWT", "opis": "", "warstwy": [] } ] }
 }
 
 ###
 
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-Content-Length: 57
+GET http://localhost:8080/api/tablice/16/export.pdf?width=1600&height=900&grid=true&step=32&email=nauczyciel@local
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!"
-}
-
-<> 2025-09-06T190347.401.json
+<> tablica-16.pdf
 
 ###
 
-POST http://localhost:8080/api/tablice/import?email=nauczyciel@local
-Content-Type: application/json
-Authorization: Bearer
-Content-Length: 249
+GET http://localhost:8080/api/tablice/16/export.png?width=1600&height=900&grid=true&step=32&email=nauczyciel@local
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Tablica testowa (pusta)",
-  "wlascicielEmail": "nauczyciel@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": []
-}
+<> tablica-16.png
 
 ###
 
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-Content-Length: 57
+GET http://localhost:8080/api/tablice/16/export?format=JSON&email=nauczyciel@local
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!"
-}
-
-<> 2025-09-06T190216.401.json
+<> 2025-09-12T034905.200.json
 
 ###
 
-GET http://localhost:8080/api/tablice?wlascicielId=1&page=0&size=10&sort=id,desc
-X-User-Id: 5
+GET http://localhost:8080/api/tablice/16
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
+
+<> 2025-09-12T034820.200.json
 
 ###
 
 POST http://localhost:8080/api/tablice
-X-User-Id: 1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 Content-Type: application/json
-Content-Length: 57
+Content-Length: 50
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{ "tytul": "Nie powinno przejść", "wlascicielId": 999 }
+{ "tytul": "Debug 1757641597", "wlascicielId": 2 }
+
+<> 2025-09-12T034637.200.json
 
 ###
 
-GET http://localhost:8080/api/tablice?page=0&size=10&sort=id,desc
-X-User-Id: 1
+GET http://localhost:8080/api/tablice/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
+
+<> 2025-09-12T034632.400.json
 
 ###
 
 POST http://localhost:8080/api/tablice
-X-User-Id: 1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
 Content-Type: application/json
-Content-Length: 65
+Content-Length: 50
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{
-  "tytul": "Tablica testowa – backend",
-  "wlascicielId": 1
-}
+{ "tytul": "Debug 1757641299", "wlascicielId": 2 }
+
+<> 2025-09-12T034139.200.json
+
+###
+
+GET http://localhost:8080/api/tablice/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-12T034019.400.json
+
+###
+
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
+Content-Type: application/json
+Content-Length: 50
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{ "tytul": "Debug 1757641212", "wlascicielId": 2 }
+
+<> 2025-09-12T034012.200.json
+
+###
+
+GET http://localhost:8080/api/uzytkownicy/whoami
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDExNzMsImV4cCI6MTc1NzY0MjA3MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9._At_sR-D0L0uc2CEhJRi2N6fGgXBvxCnSlzH2jCfmlc
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-12T034006.200.json
 
 ###
 
@@ -307,33 +220,19 @@ User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!"
-}
+{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-06T183441.401.json
+<> 2025-09-12T033933.200.json
 
 ###
 
-POST http://localhost:8080/api/tablice/import?email=nauczyciel@local
-Content-Type: application/json
-Authorization: Bearer
-Content-Length: 249
+GET http://localhost:8080/api/uzytkownicy/whoami
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDEwODMsImV4cCI6MTc1NzY0MTk4MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.jpL3DZZbZd2KXh2Xrmv_TwQiDf9W9McsnGFmIr-2rng
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Tablica testowa (pusta)",
-  "wlascicielEmail": "nauczyciel@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": []
-}
+<> 2025-09-12T033808.200.json
 
 ###
 
@@ -344,31 +243,57 @@ User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-{
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!"
-}
+{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-06T182938.401.json
+<> 2025-09-12T033803.200.json
 
 ###
 
-POST http://localhost:8080/api/auth/rejestruj
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDA3OTksImV4cCI6MTc1NzY0MTY5OSwidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.aa3kK1pLd8utAyDLgIa_VV9SQhCSVgFl3S3u50acK5E
 Content-Type: application/json
-Content-Length: 104
+Content-Length: 50
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!",
-  "imie": "Nauczyciel",
-  "nazwisko": "Local"
-}
+{ "tytul": "Debug 1757640855", "wlascicielId": 2 }
 
-<> 2025-09-06T165815.400.json
+<> 2025-09-12T033415.200.json
+
+###
+
+GET http://localhost:8080/api/tablice/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDA3OTksImV4cCI6MTc1NzY0MTY5OSwidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.aa3kK1pLd8utAyDLgIa_VV9SQhCSVgFl3S3u50acK5E
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-12T033332.400.json
+
+###
+
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDA3OTksImV4cCI6MTc1NzY0MTY5OSwidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.aa3kK1pLd8utAyDLgIa_VV9SQhCSVgFl3S3u50acK5E
+Content-Type: application/json
+Content-Length: 50
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{ "tytul": "Debug 1757640805", "wlascicielId": 2 }
+
+<> 2025-09-12T033325.200.json
+
+###
+
+GET http://localhost:8080/api/uzytkownicy/whoami
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDA3OTksImV4cCI6MTc1NzY0MTY5OSwidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.aa3kK1pLd8utAyDLgIa_VV9SQhCSVgFl3S3u50acK5E
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-12T033322.200.json
 
 ###
 
@@ -378,455 +303,301 @@ Content-Length: 57
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel@local",
-  "haslo": "Passw0rd!"
-}
+{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-06T165556.401.json
+<> 2025-09-12T033319.200.json
 
 ###
 
-GET http://localhost:8080/api/tablice/8/export.pdf?width=1600&height=900
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTE5MjYxLCJleHAiOjE3NTcxMjAxNjEsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.tt7Wxk1T2tLjQlZdDc87CJdb8MHufiXV6_Tjb9UF9xI
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
-
-<> tablica-8.pdf
-
-###
-
-GET http://localhost:8080/api/tablice/8/export.png?width=1600&height=900
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTE5MjYxLCJleHAiOjE3NTcxMjAxNjEsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.tt7Wxk1T2tLjQlZdDc87CJdb8MHufiXV6_Tjb9UF9xI
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
-
-<> tablica-8.png
-
-###
-
-POST http://localhost:8080/api/tablice/import?email=nauczyciel2@local
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTE5MjYxLCJleHAiOjE3NTcxMjAxNjEsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.tt7Wxk1T2tLjQlZdDc87CJdb8MHufiXV6_Tjb9UF9xI
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDA2NTUsImV4cCI6MTc1NzY0MTU1NSwidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.xvC5YsSNlLffx_Q_NX2LDg_FXAnWDXGc4yWjY_2WdCo
 Content-Type: application/json
-Content-Length: 432
+Content-Length: 31
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Plansza testowa",
-  "wlascicielEmail": "nauczyciel2@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": [
-    {
-      "id": null,
-      "autorEmail": "nauczyciel2@local",
-      "kolor": "#000000",
-      "grubosc": 3,
-      "punkty": [[0,0],[10,10]],
-      "czas": "2025-01-01T00:00:01Z"
-    }
-  ]
-}
+{ "tytul": "Debug 1757640659" }
 
-<> 2025-09-06T024110.200.json
+<> 2025-09-12T033059.400.json
 
 ###
 
 POST http://localhost:8080/api/auth/login
 Content-Type: application/json
-Content-Length: 58
+Content-Length: 57
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
+{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-06T024101.200.json
-
-###
-
-GET http://localhost:8080/api/tablice/3/export?email=nauczyciel2@local
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTEzOTg3LCJleHAiOjE3NTcxMTQ4ODcsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.YZS90xcbHDo-hy7ujRYQKsePK0qQz80ouhkQ5e4ZlaY
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
-
-<> 2025-09-06T011528.200.json
-
-###
-
-POST http://localhost:8080/api/tablice/import?email=nauczyciel2@local
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTEzOTg3LCJleHAiOjE3NTcxMTQ4ODcsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.YZS90xcbHDo-hy7ujRYQKsePK0qQz80ouhkQ5e4ZlaY
-Content-Type: application/json
-Content-Length: 432
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
-
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Plansza testowa",
-  "wlascicielEmail": "nauczyciel2@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": [
-    {
-      "id": null,
-      "autorEmail": "nauczyciel2@local",
-      "kolor": "#000000",
-      "grubosc": 3,
-      "punkty": [[0,0],[10,10]],
-      "czas": "2025-01-01T00:00:01Z"
-    }
-  ]
-}
-
-<> 2025-09-06T011419.200.json
+<> 2025-09-12T033055.200.json
 
 ###
 
 POST http://localhost:8080/api/auth/login
 Content-Type: application/json
-Content-Length: 58
+Content-Length: 57
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
+{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-06T011307.200.json
+<> 2025-09-12T032920.200.json
 
 ###
 
-POST http://localhost:8080/api/tablice/import?email=nauczyciel2@local
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTEzNjMzLCJleHAiOjE3NTcxMTQ1MzMsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.bpoqt8bIR-ntfpTAxB9fXFMnWVs4GUKy0v_DLOdq24I
-Content-Type: application/json
-Content-Length: 432
+GET http://localhost:8080/api/tablice/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDAxMzMsImV4cCI6MTc1NzY0MTAzMywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.T1Zm3M5Yh860-TPCKc6xWfGc4RGLAX1vxhAK_LAHqEE
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Plansza testowa",
-  "wlascicielEmail": "nauczyciel2@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": [
-    {
-      "id": null,
-      "autorEmail": "nauczyciel2@local",
-      "kolor": "#000000",
-      "grubosc": 3,
-      "punkty": [[0,0],[10,10]],
-      "czas": "2025-01-01T00:00:01Z"
-    }
-  ]
-}
+<> 2025-09-12T032241.400.json
 
-<> 2025-09-06T010723.500.json
+###
+
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDAxMzMsImV4cCI6MTc1NzY0MTAzMywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.T1Zm3M5Yh860-TPCKc6xWfGc4RGLAX1vxhAK_LAHqEE
+Content-Type: application/json
+Content-Length: 59
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{ "tytul": "Debug JWT", "opis": "Test", "wlascicielId": 2 }
+
+<> 2025-09-12T032233.200.json
+
+###
+
+GET http://localhost:8080/api/uzytkownicy/whoami
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2NDAxMzMsImV4cCI6MTc1NzY0MTAzMywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.T1Zm3M5Yh860-TPCKc6xWfGc4RGLAX1vxhAK_LAHqEE
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-12T032224.200.json
 
 ###
 
 POST http://localhost:8080/api/auth/login
 Content-Type: application/json
-Content-Length: 58
+Content-Length: 57
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
+{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-06T010713.200.json
+<> 2025-09-12T032213.200.json
 
 ###
 
-POST http://localhost:8080/api/tablice/import?email=nauczyciel2@local
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTEzMDY2LCJleHAiOjE3NTcxMTM5NjYsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.kAopITV7p3v8Gvw3_mi_Eo7ZVK5KMimsiKXT1Caqhx0
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
 Content-Type: application/json
-Content-Length: 432
+Content-Length: 59
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Plansza testowa",
-  "wlascicielEmail": "nauczyciel2@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": [
-    {
-      "id": null,
-      "autorEmail": "nauczyciel2@local",
-      "kolor": "#000000",
-      "grubosc": 3,
-      "punkty": [[0,0],[10,10]],
-      "czas": "2025-01-01T00:00:01Z"
-    }
-  ]
-}
-
-<> 2025-09-06T005753.500.json
+{ "tytul": "Debug JWT", "opis": "Test", "wlascicielId": 2 }
 
 ###
 
-POST http://localhost:8080/api/auth/login
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
 Content-Type: application/json
-Content-Length: 58
+Content-Length: 59
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
-
-<> 2025-09-06T005746.200.json
+{ "tytul": "Debug JWT", "opis": "Test", "wlascicielId": 2 }
 
 ###
 
-POST http://localhost:8080/api/auth/rejestruj
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
 Content-Type: application/json
-Content-Length: 123
+Content-Length: 59
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!",
-  "rola": "NAUCZYCIEL",
-  "nazwaWyswietlana": "Nauczyciel Test"
-}
-
-<> 2025-09-06T005740.200.json
+{ "tytul": "Debug JWT", "opis": "Test", "wlascicielId": 2 }
 
 ###
 
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-Content-Length: 58
+GET http://localhost:8080/api/tablice/1/export?format=JSON&email=nauczyciel@local
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
-
-<> 2025-09-06T005735.401.json
+<> 2025-09-12T015855.400.json
 
 ###
 
-POST http://localhost:8080/api/tablice/import?email=nauczyciel2@local
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTEyMDYxLCJleHAiOjE3NTcxMTI5NjEsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.RjClH3cNTU7cey0D9_3WUCrH-PUP0igHb6pSD2_NU8s
-Content-Type: application/json
-Content-Length: 432
+GET http://localhost:8080/api/tablice/1/eksport?format=JSON
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Plansza testowa",
-  "wlascicielEmail": "nauczyciel2@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": [
-    {
-      "id": null,
-      "autorEmail": "nauczyciel2@local",
-      "kolor": "#000000",
-      "grubosc": 3,
-      "punkty": [[0,0],[10,10]],
-      "czas": "2025-01-01T00:00:01Z"
-    }
-  ]
-}
+<> 2025-09-12T015615.500.json
 
-<> 2025-09-06T004105.500.json
+###
+
+GET http://localhost:8080/api/tablice/1/export?format=JSON
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-12T015526.400.json
+
+###
+
+GET http://localhost:8080/api/tablice/1/eksport?format=JSON
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-12T015455.500.json
+
+###
+
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
+Content-Type: application/json
+Content-Length: 59
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{ "tytul": "Debug JWT", "opis": "Test", "wlascicielId": 2 }
+
+<> 2025-09-12T015432.200.json
+
+###
+
+GET http://localhost:8080/api/uzytkownicy/whoami
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-12T015429.200.json
+
+###
+
+GET http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 379
+
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ4NjMsImV4cCI6MTc1NzYzNTc2MywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.v63wiHGhcJCNLAkgMAFvJvHL3mGZUkPWBiRL1OuUzgQ
+Content-Type: application/json
+
+{ "nazwa": "Debug JWT", "opis": "Test" }
+
+<> 2025-09-12T015425.200.json
 
 ###
 
 POST http://localhost:8080/api/auth/login
 Content-Type: application/json
-Content-Length: 58
+Content-Length: 57
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
+{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-06T004101.200.json
+<> 2025-09-12T015423.200.json
 
 ###
 
-POST http://localhost:8080/api/auth/rejestruj
-Content-Type: application/json
-Content-Length: 123
+GET http://localhost:8080/api/tablice/1/eksport?format=JSON
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ1NDcsImV4cCI6MTc1NzYzNTQ0NywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.n3GFKbEsZxkvU2N7zI_2lVtX9w-Tu6-rhKxaxhJbJbs
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!",
-  "rola": "NAUCZYCIEL",
-  "nazwaWyswietlana": "Nauczyciel Test"
-}
-
-<> 2025-09-06T004050.200.json
+<> 2025-09-12T015402.500.json
 
 ###
 
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-Content-Length: 58
+GET http://localhost:8080/api/tablice/1/eksport?format=json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ1NDcsImV4cCI6MTc1NzYzNTQ0NywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.n3GFKbEsZxkvU2N7zI_2lVtX9w-Tu6-rhKxaxhJbJbs
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
-
-<> 2025-09-06T003937.401.json
+<> 2025-09-12T014954.500.json
 
 ###
 
-POST http://localhost:8080/api/auth/login
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ1NDcsImV4cCI6MTc1NzYzNTQ0NywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.n3GFKbEsZxkvU2N7zI_2lVtX9w-Tu6-rhKxaxhJbJbs
 Content-Type: application/json
-Content-Length: 58
+Content-Length: 59
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
+{ "tytul": "Debug JWT", "opis": "Test", "wlascicielId": 2 }
 
-<> 2025-09-06T003841.401.json
+<> 2025-09-12T014941.200.json
 
 ###
 
-POST http://localhost:8080/api/tablice/import?email=nauczyciel2@local
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWwyQGxvY2FsIiwiaWF0IjoxNzU3MTA3MzkzLCJleHAiOjE3NTcxMDgyOTMsInVpZCI6NCwicm9sYSI6Ik5BVUNaWUNJRUwiLCJ0eXBUb2tlbnUiOiJBQ0NFU1MifQ.P4xqssqAAOi2oApg4pN6-MsaxW-Nl5LePSrl8vLmyNk
-Content-Type: application/json
-Content-Length: 432
+GET http://localhost:8080/api/uzytkownicy/whoami
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ1NDcsImV4cCI6MTc1NzYzNTQ0NywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.n3GFKbEsZxkvU2N7zI_2lVtX9w-Tu6-rhKxaxhJbJbs
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "schema": "pl.tablica/board-export",
-  "version": 1,
-  "id": null,
-  "tytul": "Plansza testowa",
-  "wlascicielEmail": "nauczyciel2@local",
-  "utworzono": "2025-01-01T00:00:00Z",
-  "zmodyfikowano": "2025-01-01T00:00:00Z",
-  "strokes": [
-    {
-      "id": null,
-      "autorEmail": "nauczyciel2@local",
-      "kolor": "#000000",
-      "grubosc": 3,
-      "punkty": [[0,0],[10,10]],
-      "czas": "2025-01-01T00:00:01Z"
-    }
-  ]
-}
+<> 2025-09-12T014921.200.json
 
-<> 2025-09-05T232318.500.json
+###
+
+GET http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ1NDcsImV4cCI6MTc1NzYzNTQ0NywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.n3GFKbEsZxkvU2N7zI_2lVtX9w-Tu6-rhKxaxhJbJbs
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 379
+
+POST http://localhost:8080/api/tablice
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YmFwcCIsInN1YiI6Im5hdWN6eWNpZWxAbG9jYWwiLCJpYXQiOjE3NTc2MzQ1NDcsImV4cCI6MTc1NzYzNTQ0NywidWlkIjoyLCJyb2xhIjoiTkFVQ1pZQ0lFTCIsInR5cFRva2VudSI6IkFDQ0VTUyJ9.n3GFKbEsZxkvU2N7zI_2lVtX9w-Tu6-rhKxaxhJbJbs
+Content-Type: application/json
+
+{ "nazwa": "Debug JWT", "opis": "Test" }
+
+<> 2025-09-12T014910.200.json
 
 ###
 
 POST http://localhost:8080/api/auth/login
 Content-Type: application/json
-Content-Length: 58
+Content-Length: 57
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
 
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!"
-}
+{ "email": "nauczyciel@local", "haslo": "nauczyciel123" }
 
-<> 2025-09-05T232313.200.json
-
-###
-
-POST http://localhost:8080/api/auth/rejestruj
-Content-Type: application/json
-Content-Length: 123
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.1.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-Cookie: JSESSIONID=C57B8B0E8B15451DC2712B856FCADF5A
-
-{
-  "email": "nauczyciel2@local",
-  "haslo": "Haslo123!",
-  "rola": "NAUCZYCIEL",
-  "nazwaWyswietlana": "Nauczyciel Test"
-}
-
-<> 2025-09-05T232310.200.json
+<> 2025-09-12T014907.200.json
 
 ###
 

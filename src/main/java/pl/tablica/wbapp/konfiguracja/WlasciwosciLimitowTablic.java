@@ -1,36 +1,34 @@
 package pl.tablica.wbapp.konfiguracja;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import java.time.Duration;
 
 @ConfigurationProperties(prefix = "tablica.limity")
 public class WlasciwosciLimitowTablic {
+    private Integer maksTablicNaUzytkownika;
+    private Integer maksUczestnikowNaTablice;
+    private long importMaxBytes = 1_048_576L;
 
-    public static class Zestaw {
-        private Integer maxTablic;
-        private Integer maxUczestnikowNaTablice;
-        private Duration maxCzasTrwania;
-
-        public Integer getMaxTablic() { return maxTablic; }
-        public void setMaxTablic(Integer maxTablic) { this.maxTablic = maxTablic; }
-
-        public Integer getMaxUczestnikowNaTablice() { return maxUczestnikowNaTablice; }
-        public void setMaxUczestnikowNaTablice(Integer v) { this.maxUczestnikowNaTablice = v; }
-
-        public Duration getMaxCzasTrwania() { return maxCzasTrwania; }
-        public void setMaxCzasTrwania(Duration maxCzasTrwania) { this.maxCzasTrwania = maxCzasTrwania; }
+    public Integer getMaksTablicNaUzytkownika() {
+        return maksTablicNaUzytkownika;
     }
 
-    private Zestaw uczen = new Zestaw();
-    private Zestaw nauczyciel = new Zestaw();
-    private Zestaw admin = new Zestaw();
+    public void setMaksTablicNaUzytkownika(Integer maksTablicNaUzytkownika) {
+        this.maksTablicNaUzytkownika = maksTablicNaUzytkownika;
+    }
 
-    public Zestaw getUczen() { return uczen; }
-    public void setUczen(Zestaw uczen) { this.uczen = uczen; }
+    public Integer getMaksUczestnikowNaTablice() {
+        return maksUczestnikowNaTablice;
+    }
 
-    public Zestaw getNauczyciel() { return nauczyciel; }
-    public void setNauczyciel(Zestaw nauczyciel) { this.nauczyciel = nauczyciel; }
+    public void setMaksUczestnikowNaTablice(Integer maksUczestnikowNaTablice) {
+        this.maksUczestnikowNaTablice = maksUczestnikowNaTablice;
+    }
 
-    public Zestaw getAdmin() { return admin; }
-    public void setAdmin(Zestaw admin) { this.admin = admin; }
+    public long getImportMaxBytes() {
+        return importMaxBytes;
+    }
+
+    public void setImportMaxBytes(long importMaxBytes) {
+        this.importMaxBytes = importMaxBytes;
+    }
 }

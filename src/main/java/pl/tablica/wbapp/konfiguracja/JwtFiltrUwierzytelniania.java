@@ -42,7 +42,7 @@ public class JwtFiltrUwierzytelniania extends OncePerRequestFilter {
                         AbstractAuthenticationToken auth = new AbstractAuthenticationToken(
                                 List.of(new SimpleGrantedAuthority(rola))) {
                             @Override public Object getCredentials() { return token; }
-                            @Override public Object getPrincipal() { return u.getEmail(); }
+                            @Override public Object getPrincipal() { return u; }
                         };
                         auth.setAuthenticated(true);
                         SecurityContextHolder.getContext().setAuthentication(auth);

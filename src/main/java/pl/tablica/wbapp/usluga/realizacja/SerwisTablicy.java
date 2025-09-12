@@ -1,10 +1,10 @@
-package pl.tablica.wbapp.usluga;
+package pl.tablica.wbapp.usluga.realizacja;
 
+import pl.tablica.wbapp.dto.NowaTablicaDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.tablica.wbapp.dto.NowaTablicaDto;
 import pl.tablica.wbapp.dto.TablicaDto;
 import pl.tablica.wbapp.model.KontoUzytkownika;
 import pl.tablica.wbapp.model.Tablica;
@@ -24,11 +24,14 @@ public class SerwisTablicy {
 
     @Transactional
     public TablicaDto utworz(NowaTablicaDto in) {
-        KontoUzytkownika wlasciciel = repoKonta.findById(in.wlascicielId)
-                .orElseThrow(() -> new IllegalArgumentException("Nie znaleziono właściciela id=" + in.wlascicielId));
+        KontoUzytkownika wlasciciel = repoKonta.findById(in.getWlascicielId())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Nie znaleziono właściciela id=" + in.getWlascicielId()));
+
         Tablica t = new Tablica();
-        t.setTytul(in.tytul);
+        t.setTytul(in.getTytul());
         t.setWlasciciel(wlasciciel);
+
         t = repoTablicy.save(t);
         return toDto(t);
     }

@@ -1,23 +1,51 @@
-@baseUrl = {{baseUrl}}
-@email = {{email}}
-@haslo = {{haslo}}
-@auth = Bearer {{jwt}}
-@tablicaId = 1
-
-### 1) LOGIN → zapisuje {{jwt}} i {{auth}}
-POST {{baseUrl}}/api/auth/login
+### 1) LOGIN -> {{jwt}}
+POST {{baseUrl}}/api/uwierzytelniania/logowanie
 Content-Type: application/json
 
-{ "email": "{{email}}", "haslo": "{{haslo}}" }
+{
+  "email": "{{email}}",
+  "haslo": "{{haslo}}"
+}
 
 > {%
     const b = response.body || {};
-    const t = b.jwt || b.token || b.accessToken || (b.data && (b.data.jwt || b.data.token || b.data.accessToken));
+    const t = b.jwt || b.token || b.accessToken || (b.dane && b.dane.token);
     if (!t) throw new Error("Brak tokena w odpowiedzi");
     client.global.set("jwt", t);
-    client.global.set("auth", "Bearer " + t);
 %}
 
-### 2) LISTA
+### 2) UTWÓRZ -> {{tablicaId}}
+POST {{baseUrl}}/api/tablice
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{ "tytul": "Debug {{$timestamp}}" }
+
+> {%
+    const b = response.body || {};
+    const id = b.id || b.tablicaId || (b.data && b.data.id);
+    if (!id) throw new Error("Brak id tablicy w odpowiedzi");
+    client.global.set("tablicaId", String(id));
+%}
+
+### 4) POTWIERDŹ
 GET {{baseUrl}}/api/tablice
-Authorization: {{auth}}
+Authorization: Bearer {{jwt}}
+
+### 5) IMPORT
+POST {{baseUrl}}/api/import
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "format": "JSON",
+  "dane": {
+    "tablice": [
+      { "tytul": "Import {{$timestamp}}", "nazwa": "Import {{$timestamp}}" }
+    ]
+  }
+}
+
+### 6) POTWIERDŹ LISTĄ
+GET {{baseUrl}}/api/tablice
+Authorization: Bearer {{jwt}}

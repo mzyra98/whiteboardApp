@@ -56,7 +56,6 @@ httpRequests/*.png
 httpRequests/*.pdf
 httpRequests/http-client.cookies
 
-# Jeśli ktoś trzyma prywatne env poza .idea
 http-client.env.json
 http-client.private.env.json
 
