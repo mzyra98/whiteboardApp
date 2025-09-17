@@ -1,0 +1,64 @@
+### LOGIN
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "haslo": "{{haslo}}"
+}
+
+> {%
+    /**
+     * UWAGA: klucze w client.global.set MUSZĄ być w cudzysłowach — inaczej
+     * dostaniesz warning "TextStreamResponse is not assignable to type string".
+     */
+    const b = response.body || {};
+    const access =
+        b.token ?? b.accessToken ?? b.access ?? "";
+    const refresh =
+        b.refreshToken ?? b.refresh ?? "";
+    const uid =
+        (b.uzytkownik && b.uzytkownik.id) ?? b.userId ?? b.id ?? 0;
+
+    client.global.set("access", access);
+    client.global.set("refresh", refresh);
+    client.global.set("uid", uid);
+
+    /** pomocniczy log (nie jest nagłówkiem HTTP, więc NIE powoduje warningów) */
+    console.log("access=", access);
+    console.log("refresh=", refresh);
+    console.log("uid=", uid);
+%}
+
+### WHOAMI
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{access}}
+Accept: application/json
+
+> {%
+    client.test("WHOAMI powinno zwrócić 200", () => {
+        client.assert(response.status === 200);
+    });
+%}
+
+### POBIERZ_STATYSTYKI_TABLICY
+GET {{baseUrl}}/api/statystyki/tablicy/{{tablicaId}}
+Authorization: Bearer {{access}}
+Accept: application/json
+
+> {%
+    client.test("STATYSTYKI 200/404", () => {
+        client.assert([200,404].includes(response.status));
+    });
+%}
+
+### POKAŻ_AKTUALNE_ZMIENNE
+GET {{baseUrl}}/actuator/health
+Authorization: Bearer {{access}}
+
+> {%
+    console.log("ENV access =", client.global.get("access"));
+    console.log("ENV refresh =", client.global.get("refresh"));
+    console.log("ENV uid     =", client.global.get("uid"));
+    console.log("ENV tablicaId =", "{{tablicaId}}");
+%}
