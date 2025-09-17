@@ -1,10 +1,15 @@
 package pl.tablica.wbapp.kontroler;
 
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import pl.tablica.wbapp.dto.Autoryzacja.*;
+import pl.tablica.wbapp.dto.Autoryzacja.Logowanie;
+import pl.tablica.wbapp.dto.Autoryzacja.MojaOdpowiedz;
+import pl.tablica.wbapp.dto.Autoryzacja.Odpowiedz;
+import pl.tablica.wbapp.dto.Autoryzacja.OdswiezProces;
+import pl.tablica.wbapp.dto.Autoryzacja.Rejestracja;
 import pl.tablica.wbapp.model.KontoUzytkownika;
 import pl.tablica.wbapp.repozytorium.RepozytoriumKontaUzytkownika;
 import pl.tablica.wbapp.usluga.SerwisAutoryzacji;
@@ -14,33 +19,42 @@ import pl.tablica.wbapp.usluga.SerwisAutoryzacji;
 public class KontrolerAutoryzacji {
 
     private final SerwisAutoryzacji serwis;
-    private final RepozytoriumKontaUzytkownika repo;
+    private final RepozytoriumKontaUzytkownika repozytorium;
 
-    public KontrolerAutoryzacji(SerwisAutoryzacji serwis, RepozytoriumKontaUzytkownika repo) {
+    public KontrolerAutoryzacji(SerwisAutoryzacji serwis,
+                                RepozytoriumKontaUzytkownika repozytorium) {
         this.serwis = serwis;
-        this.repo = repo;
+        this.repozytorium = repozytorium;
     }
 
-    @PostMapping("/rejestruj")
-    public ResponseEntity<Odpowiedz> rejestruj(@Valid @RequestBody Rejestracja dto) {
-        return ResponseEntity.ok(serwis.rejestruj(dto));
+    @PostMapping("/register")
+    public ResponseEntity<Odpowiedz> register(@Valid @RequestBody Rejestracja dto) {
+        Odpowiedz out = serwis.rejestruj(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(out);
     }
 
     @PostMapping("/login")
     public ResponseEntity<Odpowiedz> login(@Valid @RequestBody Logowanie dto) {
-        return ResponseEntity.ok(serwis.login(dto));
+        Odpowiedz out = serwis.login(dto);
+        return ResponseEntity.ok(out);
     }
 
     @PostMapping("/odswiez")
     public ResponseEntity<Odpowiedz> odswiez(@Valid @RequestBody OdswiezProces dto) {
-        return ResponseEntity.ok(serwis.odswiez(dto));
+        Odpowiedz out = serwis.odswiez(dto);
+        return ResponseEntity.ok(out);
     }
 
     @GetMapping("/me")
     public ResponseEntity<MojaOdpowiedz> me(Authentication auth) {
-        if (auth == null) return ResponseEntity.status(401).build();
-        String email = String.valueOf(auth.getPrincipal());
-        KontoUzytkownika u = repo.findByEmailIgnoreCase(email).orElseThrow();
+        if (auth == null || auth.getPrincipal() == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        String email = auth.getName();
+        KontoUzytkownika u = repozytorium.findByEmailIgnoreCase(email).orElse(null);
+        if (u == null || !u.isAktywny()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         return ResponseEntity.ok(serwis.me(u));
     }
 

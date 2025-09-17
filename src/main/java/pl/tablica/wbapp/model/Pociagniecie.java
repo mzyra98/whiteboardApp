@@ -1,7 +1,7 @@
 package pl.tablica.wbapp.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Table(name = "strokes")
@@ -18,10 +18,10 @@ public class Pociagniecie extends EncjaBazowa {
     private String dane;
 
     @Column(nullable = false)
-    private String typ;  // np. "pen", "eraser"
+    private String typ;
 
     @Column(nullable = false)
-    private LocalDateTime czas = LocalDateTime.now();
+    private Instant czas = Instant.now();
 
     public Tablica getTablica() { return tablica; }
     public void setTablica(Tablica tablica) { this.tablica = tablica; }
@@ -31,7 +31,6 @@ public class Pociagniecie extends EncjaBazowa {
     public void setDane(String dane) { this.dane = dane; }
     public String getTyp() { return typ; }
     public void setTyp(String typ) { this.typ = typ; }
-    public LocalDateTime getCzas() { return czas; }
-    public void setCzas(LocalDateTime czas) { this.czas = czas; }
+    public Instant getCzas() { return czas; }
+    public void setCzas(Instant czas) { this.czas = czas; }
 }
-

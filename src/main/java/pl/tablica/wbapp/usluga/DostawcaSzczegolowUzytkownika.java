@@ -32,7 +32,7 @@ public class DostawcaSzczegolowUzytkownika implements UserDetailsService {
 
         return new User(
                 konto.getEmail(),
-                konto.getHaslo(),
+                konto.getHasloHash(),
                 List.of(new SimpleGrantedAuthority(rola))
         );
     }

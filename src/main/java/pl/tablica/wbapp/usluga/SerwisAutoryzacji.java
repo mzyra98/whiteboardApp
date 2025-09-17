@@ -15,6 +15,8 @@ import pl.tablica.wbapp.wyjatek.ErrorCode;
 import pl.tablica.wbapp.wyjatek.KolizjaWartosci;
 import pl.tablica.wbapp.wyjatek.WyjatekAplikacji;
 
+import java.util.Map;
+
 @Service
 public class SerwisAutoryzacji {
 
@@ -53,9 +55,12 @@ public class SerwisAutoryzacji {
 
     public Odpowiedz login(Logowanie dto) {
         KontoUzytkownika u = repo.findByEmailIgnoreCase(dto.getEmail())
-                .orElseThrow(() -> new WyjatekAplikacji(ErrorCode.NIEPRAWIDLOWE_CREDENCJALE, "Nieprawidłowy e-mail lub hasło"));
+                .orElseThrow(() -> new WyjatekAplikacji(
+                        ErrorCode.NIEPRAWIDLOWE_CREDENCJALE,
+                        "Nieprawidłowy e-mail lub hasło"));
         if (!u.isAktywny() || !encoder.matches(dto.getHaslo(), u.getHasloHash())) {
-            throw new WyjatekAplikacji(ErrorCode.NIEPRAWIDLOWE_CREDENCJALE, "Nieprawidłowy e-mail lub hasło");
+            throw new WyjatekAplikacji(ErrorCode.NIEPRAWIDLOWE_CREDENCJALE,
+                    "Nieprawidłowy e-mail lub hasło");
         }
         String access = jwt.generujAccessToken(u.getId(), u.getEmail(), u.getRola().name());
         String refresh = jwt.generujRefreshToken(u.getId(), u.getEmail(), u.getRola().name());
@@ -63,19 +68,34 @@ public class SerwisAutoryzacji {
     }
 
     public Odpowiedz odswiez(OdswiezProces dto) {
-        var zw = jwt.zweryfikuj(dto.getRefreshToken())
-                .orElseThrow(() -> new WyjatekAplikacji(ErrorCode.NIEPRAWIDLOWE_CREDENCJALE, "Refresh token jest nieprawidłowy lub wygasł"));
-        if (zw.typ() != UslugaJwt.TypTokenu.REFRESH) {
-            throw new WyjatekAplikacji(ErrorCode.NIEPRAWIDLOWE_CREDENCJALE, "Przekazano nieprawidłowy typ tokenu");
+        Map<String, Object> claims = jwt.zweryfikuj(dto.getRefreshToken())
+                .orElseThrow(() -> new WyjatekAplikacji(
+                        ErrorCode.NIEPRAWIDLOWE_CREDENCJALE,
+                        "Nieprawidłowy lub wygasły token."));
+
+        Object typ = claims.get("typ");
+        if (typ != null && !"REFRESH".equals(String.valueOf(typ))) {
+            throw new WyjatekAplikacji(
+                    ErrorCode.NIEPRAWIDLOWE_CREDENCJALE,
+                    "Przekazano nieprawidłowy typ tokenu.");
         }
-        KontoUzytkownika u = repo.findByEmailIgnoreCase(zw.email())
-                .orElseThrow(() -> new WyjatekAplikacji(ErrorCode.NIEPRAWIDLOWE_CREDENCJALE, "Użytkownik nie istnieje"));
-        String access = jwt.generujAccessToken(u.getId(), u.getEmail(), u.getRola().name());
+
+        String email = String.valueOf(claims.get("sub"));
+
+        KontoUzytkownika u = repo.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new WyjatekAplikacji(
+                        ErrorCode.NIEPRAWIDLOWE_CREDENCJALE,
+                        "Użytkownik nie istnieje."));
+
+        String access  = jwt.generujAccessToken(u.getId(), u.getEmail(), u.getRola().name());
         String refresh = jwt.generujRefreshToken(u.getId(), u.getEmail(), u.getRola().name());
         return new Odpowiedz(access, refresh);
     }
-
     public MojaOdpowiedz me(KontoUzytkownika u) {
-        return new MojaOdpowiedz(u.getId(), u.getEmail(), u.getNazwaWyswietlana(), u.getRola().name());
+        return new MojaOdpowiedz(
+                u.getId(),
+                u.getEmail(),
+                u.getNazwaWyswietlana(),
+                u.getRola().name());
     }
 }

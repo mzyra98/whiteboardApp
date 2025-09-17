@@ -1,7 +1,5 @@
 package pl.tablica.wbapp.usluga.realizacja;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -31,12 +29,10 @@ public class UslugaRenderowaniaTablicyDomyslneUstawienia implements UslugaRender
     @PersistenceContext
     private EntityManager em;
 
-    private final ObjectMapper om = new ObjectMapper();
-
     @Override
     public byte[] renderujPng(Long tablicaId, Integer szerokosc, Integer wysokosc) {
-        int w = szerokosc != null && szerokosc > 0 ? szerokosc : 1600;
-        int h = wysokosc != null && wysokosc > 0 ? wysokosc : 900;
+        int w = (szerokosc != null && szerokosc > 0) ? szerokosc : 1600;
+        int h = (wysokosc != null && wysokosc > 0) ? wysokosc : 900;
 
         var strokes = pobierzPociagniecia(tablicaId);
 
@@ -68,8 +64,8 @@ public class UslugaRenderowaniaTablicyDomyslneUstawienia implements UslugaRender
 
     @Override
     public byte[] renderujPdf(Long tablicaId, Integer szerokosc, Integer wysokosc) {
-        int w = szerokosc != null && szerokosc > 0 ? szerokosc : 1600;
-        int h = wysokosc != null && wysokosc > 0 ? wysokosc : 900;
+        int w = (szerokosc != null && szerokosc > 0) ? szerokosc : 1600;
+        int h = (wysokosc != null && wysokosc > 0) ? wysokosc : 900;
 
         var strokes = pobierzPociagniecia(tablicaId);
 
@@ -91,9 +87,11 @@ public class UslugaRenderowaniaTablicyDomyslneUstawienia implements UslugaRender
                     cs.setLineWidth(Math.max(1f, s.grubosc()));
                     var pts = s.punkty();
                     if (pts.size() >= 2) {
-                        cs.moveTo(pts.get(0)[0], h - pts.get(0)[1]);
+                        var first = pts.getFirst();
+                        cs.moveTo(first[0], h - first[1]);
                         for (int i = 1; i < pts.size(); i++) {
-                            cs.lineTo(pts.get(i)[0], h - pts.get(i)[1]);
+                            var p = pts.get(i);
+                            cs.lineTo(p[0], h - p[1]);
                         }
                         cs.stroke();
                     }
@@ -123,7 +121,6 @@ public class UslugaRenderowaniaTablicyDomyslneUstawienia implements UslugaRender
             Color kolor = odczytajKolor(obj);
             List<int[]> pkt = odczytajPunkty(obj);
             Instant czas = odczytajCzas(obj);
-            if (pkt == null) pkt = List.of();
             wynik.add(new Rysunek(grubosc, kolor, pkt, czas));
         }
         return wynik;
@@ -135,7 +132,7 @@ public class UslugaRenderowaniaTablicyDomyslneUstawienia implements UslugaRender
         String dane = odczytajDaneJson(p);
         if (dane != null) {
             try {
-                Map<String, Object> m = om.readValue(dane, new TypeReference<Map<String, Object>>() {});
+                Map<?, ?> m = new com.fasterxml.jackson.databind.ObjectMapper().readValue(dane, Map.class);
                 Object g = m.get("grubosc");
                 if (g instanceof Number n) return n.intValue();
                 if (g != null) return Integer.parseInt(g.toString());
@@ -153,7 +150,7 @@ public class UslugaRenderowaniaTablicyDomyslneUstawienia implements UslugaRender
         String dane = odczytajDaneJson(p);
         if (dane != null) {
             try {
-                Map<String, Object> m = om.readValue(dane, new TypeReference<Map<String, Object>>() {});
+                Map<?, ?> m = new com.fasterxml.jackson.databind.ObjectMapper().readValue(dane, Map.class);
                 Object k = m.get("kolor");
                 if (k != null) {
                     Color c = kolorZStringa(k.toString());
@@ -166,36 +163,29 @@ public class UslugaRenderowaniaTablicyDomyslneUstawienia implements UslugaRender
 
     private List<int[]> odczytajPunkty(Object p) {
         Object v = wartosc(p, "getPunkty", "punkty");
-        if (v instanceof List<?> l) {
-            List<int[]> wynik = new ArrayList<>();
-            for (Object el : l) {
-                if (el instanceof List<?> pp && pp.size() >= 2) {
-                    int x = toInt(pp.get(0));
-                    int y = toInt(pp.get(1));
-                    wynik.add(new int[]{x, y});
-                }
-            }
-            return wynik;
-        }
+        if (v instanceof List<?> l) return mapujPunkty(l);
+
         String dane = odczytajDaneJson(p);
         if (dane != null) {
             try {
-                Map<String, Object> m = om.readValue(dane, new TypeReference<Map<String, Object>>() {});
+                Map<?, ?> m = new com.fasterxml.jackson.databind.ObjectMapper().readValue(dane, Map.class);
                 Object arr = m.get("punkty");
-                if (arr instanceof List<?> l) {
-                    List<int[]> wynik = new ArrayList<>();
-                    for (Object el : l) {
-                        if (el instanceof List<?> pp && pp.size() >= 2) {
-                            int x = toInt(pp.get(0));
-                            int y = toInt(pp.get(1));
-                            wynik.add(new int[]{x, y});
-                        }
-                    }
-                    return wynik;
-                }
+                if (arr instanceof List<?> l) return mapujPunkty(l);
             } catch (Exception ignore) {}
         }
         return List.of();
+    }
+
+    private static List<int[]> mapujPunkty(List<?> l) {
+        List<int[]> wynik = new ArrayList<>(l.size());
+        for (Object el : l) {
+            if (el instanceof List<?> pp && pp.size() >= 2) {
+                int x = toInt(pp.get(0));
+                int y = toInt(pp.get(1));
+                wynik.add(new int[]{x, y});
+            }
+        }
+        return wynik;
     }
 
     private Instant odczytajCzas(Object p) {

@@ -25,10 +25,8 @@ public class KonfiguracjaBezpieczenstwa {
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/api/uwierzytelniania/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/actuator/**").permitAll()
-                .requestMatchers("/ws/**").permitAll()
+                .requestMatchers("/api/auth/**", "/api/uwierzytelniania/**").permitAll()
+                .requestMatchers("/h2-console/**", "/actuator/**", "/ws/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/tablice").hasAnyRole("NAUCZYCIEL","ADMIN")
                 .requestMatchers(HttpMethod.GET,
                         "/api/tablice/**/export",

@@ -14,7 +14,10 @@ public enum ErrorCode {
     NAZWA_UZYTKOWNIKA_ZAJETA(HttpStatus.CONFLICT, "Nazwa użytkownika jest już zajęta."),
     UZYTKOWNIK_MA_TABLICE(HttpStatus.CONFLICT, "Użytkownik ma już tablicę."),
     ZA_DUZO_ZADAN(HttpStatus.TOO_MANY_REQUESTS, "Za dużo żądań."),
-    NIEPRAWIDLOWE_CREDENCJALE(HttpStatus.UNAUTHORIZED, "Nieprawidłowy e-mail lub hasło.");
+    NIEPRAWIDLOWE_CREDENCJALE(HttpStatus.UNAUTHORIZED, "Nieprawidłowy e-mail lub hasło."),
+    WALIDACJA(HttpStatus.BAD_REQUEST, "Błąd walidacji."),
+    NIEPOPRAWNE_ZADANIE(HttpStatus.BAD_REQUEST, "Nieprawidłowe żądanie."),
+    NIEUPOWAZNIONY(HttpStatus.UNAUTHORIZED, "Brak uwierzytelnienia.");
 
     private final HttpStatus httpStatus;
     private final String domyslnyKomunikat;
@@ -24,11 +27,6 @@ public enum ErrorCode {
         this.domyslnyKomunikat = domyslnyKomunikat;
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
-    }
-
-    public String getDomyslnyKomunikat() {
-        return domyslnyKomunikat;
-    }
+    public HttpStatus getHttpStatus() { return httpStatus; }
+    public String getDomyslnyKomunikat() { return domyslnyKomunikat; }
 }

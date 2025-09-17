@@ -1,9 +1,8 @@
-package pl.tablica.wbapp.kontroler;
+package pl.tablica.wbapp.wyjatek;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import pl.tablica.wbapp.wyjatek.ErrorCode;
-import pl.tablica.wbapp.wyjatek.KolizjaWartosci;
-import pl.tablica.wbapp.wyjatek.WyjatekAplikacji;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -96,7 +92,7 @@ public class GlobalnyHandlerWyjatkow {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> fallback(Exception ex, HttpServletRequest req) {
         ErrorCode kod = ErrorCode.WEWNETRZNY_BLAD;
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body(kod, kod.getDomyslnyKomunikat(), req));
+        return ResponseEntity.status(kod.getHttpStatus()).body(body(kod, kod.getDomyslnyKomunikat(), req));
     }
 
     private Map<String, Object> body(ErrorCode kod, String komunikat, HttpServletRequest req) {

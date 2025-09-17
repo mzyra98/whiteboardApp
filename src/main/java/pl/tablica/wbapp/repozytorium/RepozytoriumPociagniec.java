@@ -9,7 +9,7 @@ public interface RepozytoriumPociagniec extends JpaRepository<Pociagniecie, Long
 
     List<Pociagniecie> findByTablica_IdOrderByCzasAsc(Long tablicaId);
 
-    void deleteByTablica_Id(Long tablicaId);
+    int deleteByTablica_Id(Long tablicaId);
 
     void deleteByTablica_IdIn(List<Long> tablicaIds);
 }

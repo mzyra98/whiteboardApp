@@ -23,22 +23,14 @@ public class Rejestracja {
     @Size(max = 20)
     private String rola;
 
-    public Rejestracja() {
-    }
+    public Rejestracja() {}
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getHaslo() {
-        return haslo;
-    }
-
-    public String getNazwaWyswietlana() {
-        return nazwaWyswietlana;
-    }
-
-    public String getRola() {
-        return rola;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getHaslo() { return haslo; }
+    public void setHaslo(String haslo) { this.haslo = haslo; }
+    public String getNazwaWyswietlana() { return nazwaWyswietlana; }
+    public void setNazwaWyswietlana(String nazwaWyswietlana) { this.nazwaWyswietlana = nazwaWyswietlana; }
+    public String getRola() { return rola; }
+    public void setRola(String rola) { this.rola = rola; }
 }
